@@ -1,3 +1,4 @@
+import { cloneElement } from "react";
 import { ItemInformation, Link } from "./styles";
 
 interface IPropsInformation {
@@ -7,6 +8,7 @@ interface IPropsInformation {
 export const Information = ({ title, Icon }: IPropsInformation) => {
   return (
     <ItemInformation>
+      {Icon && cloneElement(Icon)}
       <Link>{title}</Link>
     </ItemInformation>
   );

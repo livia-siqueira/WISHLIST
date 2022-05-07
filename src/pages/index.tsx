@@ -1,8 +1,18 @@
+import axios from "axios";
 import type { NextPage } from "next";
+import { getAllProducts } from "../shared/helpers/allProducts";
+import { Product } from "../shared/types";
 import ListProducts from "./list-products";
 
-const Home: NextPage = () => {
-  return <ListProducts />;
-};
+export default function Home({ allProducts }: { allProducts: Product[] }) {
+  return <ListProducts allProducts={allProducts} />;
+}
 
-export default Home;
+export async function getStaticProps() {
+  const data = await getAllProducts();
+  return {
+    props: {
+      allProducts: data.data,
+    },
+  };
+}

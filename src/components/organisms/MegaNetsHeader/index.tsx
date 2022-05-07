@@ -1,7 +1,6 @@
 import { InputSearch } from "../../atoms/InputSearch";
 import { Logo } from "../../atoms/Logo";
-import { AreaInfos } from "../../molecules/AreaInfos";
-import { SectionInfos } from "../../molecules/AreaInfos/styles";
+import { AreaInformantions } from "../../molecules/AreaInformantions";
 import { Header } from "./styles";
 
 export const MegaNetsHeader = () => {
@@ -9,7 +8,7 @@ export const MegaNetsHeader = () => {
     <Header>
       <Logo />
       <div>
-        <AreaInfos />
+        <AreaInformantions />
         <InputSearch />
       </div>
     </Header>

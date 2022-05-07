@@ -1,10 +1,10 @@
-import { Information } from "../../atoms/Info";
+import { Information } from "../../atoms/Information";
 import { SectionInfos } from "./styles";
 import { AiFillHeart } from "react-icons/ai";
 import { ImLocation2 } from "react-icons/im";
 import { BsTelephoneFill } from "react-icons/bs";
 
-export const AreaInfos = () => {
+export const AreaInformantions = () => {
   return (
     <SectionInfos>
       <Information
