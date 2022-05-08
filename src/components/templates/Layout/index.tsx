@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { MegaNetsHeader } from "../../organisms";
+import { MagaNetsHeader } from "../../organisms";
 import { Container, Main } from "./styles";
 
 interface IPropsLayout {
@@ -9,7 +9,7 @@ interface IPropsLayout {
 export const Layout = ({ children }: IPropsLayout) => {
   return (
     <Container>
-      <MegaNetsHeader />
+      <MagaNetsHeader />
       <Main>{children}</Main>
     </Container>
   );

@@ -12,3 +12,7 @@ export type Product = {
   isFreeShipping: boolean;
   image: string;
 };
+
+export type TAllProducts = {
+  products: Product[];
+};

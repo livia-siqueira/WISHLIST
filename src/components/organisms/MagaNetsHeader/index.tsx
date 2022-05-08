@@ -3,7 +3,7 @@ import { Logo } from "../../atoms/Logo";
 import { AreaInformantions } from "../../molecules/AreaInformantions";
 import { Header } from "./styles";
 
-export const MegaNetsHeader = () => {
+export const MagaNetsHeader = () => {
   return (
     <Header>
       <Logo />
