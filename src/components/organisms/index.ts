@@ -1,1 +1,1 @@
-export * from "./MegaNetsHeader";
+export * from "./MagaNetsHeader";
