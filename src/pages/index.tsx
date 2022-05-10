@@ -1,9 +1,9 @@
 import { getAllProducts } from "../shared/helpers/getProducts";
-import { Product, TAllProducts } from "../shared/types";
-import ListProducts from "./list-products";
+import { TAllProducts } from "../shared/types";
+import List from "./list-products";
 
 export default function Home({ products }: TAllProducts) {
-  return <ListProducts products={products} />;
+  return <List products={products} />;
 }
 
 export async function getStaticProps() {
