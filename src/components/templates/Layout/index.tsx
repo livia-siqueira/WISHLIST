@@ -10,7 +10,7 @@ interface IPropsLayout {
 }
 
 const titlesPages = {
-  ListaDesejos: ` > Lista de desejos`,
+  ListaDesejos: ` Lista de desejos`,
 };
 
 export const Layout = ({
@@ -24,7 +24,7 @@ export const Layout = ({
       <MagaNetsHeader onSearch={onSearch} />
       <Main>
         <AreaLinks>
-          <a onClick={() => routes.back()}>Home </a>
+          <a onClick={() => routes.back()}>Home {`>`} </a>
           <a onClick={() => routes.push("wishlist")}>
             {ListaDesejos && titlesPages["ListaDesejos"]}
           </a>

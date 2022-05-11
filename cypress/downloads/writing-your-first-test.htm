@@ -1,0 +1,871 @@
+<!doctype html>
+<html data-n-head-ssr lang="en" data-n-head="%7B%22lang%22:%7B%22ssr%22:%22en%22%7D%7D">
+  <head>
+    <title>Writing Your First Test | Cypress Documentation</title><meta data-n-head="ssr" charset="utf-8"><meta data-n-head="ssr" name="viewport" content="width=device-width,initial-scale=1"><meta data-n-head="ssr" data-hid="description" name="description" content="What you'll learn How to start testing a new project in Cypress. What passing and failing tests look like. Testing web navigation, DOM querying, and"><meta data-n-head="ssr" data-hid="og:locale" property="og:locale" content="en"><meta data-n-head="ssr" data-hid="og:description" property="og:description" content="What you'll learn How to start testing a new project in Cypress. What passing and failing tests look like. Testing web navigation, DOM querying, and"><meta data-n-head="ssr" data-hid="og:type" property="og:type" content="article"><meta data-n-head="ssr" data-hid="og:url" property="og:url" content="https://docs.cypress.io/guides/getting-started/writing-your-first-test"><meta data-n-head="ssr" data-hid="og:title" property="og:title" content="Writing Your First Test | Cypress Documentation"><meta data-n-head="ssr" data-hid="og:site_name" property="og:site_name" content="Cypress Documentation"><meta data-n-head="ssr" data-hid="og:image" property="og:image" content="https://docs.cypress.io/img/real-world-app.png"><meta data-n-head="ssr" data-hid="fb:admins" property="fb:admins" content="22600147"><meta data-n-head="ssr" data-hid="fb:app_id" property="fb:app_id" content="446223215719535"><meta data-n-head="ssr" data-hid="twitter:card" name="twitter:card" content="summary"><meta data-n-head="ssr" data-hid="twitter:title" name="twitter:title" content="Writing Your First Test | Cypress Documentation"><meta data-n-head="ssr" data-hid="twitter:description" name="twitter:description" content="What you'll learn How to start testing a new project in Cypress. What passing and failing tests look like. Testing web navigation, DOM querying, and"><meta data-n-head="ssr" data-hid="twitter:image" name="twitter:image" content="https://docs.cypress.io/img/real-world-app.png"><meta data-n-head="ssr" data-hid="twitter:url" name="twitter:url" content="https://docs.cypress.io/guides/getting-started/writing-your-first-test"><meta data-n-head="ssr" data-hid="twitter:creator" name="twitter:creator" content="@Cypress_io"><meta data-n-head="ssr" data-hid="twitter:site" name="twitter:site" content="Cypress_io"><link data-n-head="ssr" rel="icon" type="image/x-icon" href="/img/favicon.ico"><link data-n-head="ssr" data-hid="canonical" rel="canonical" href="https://docs.cypress.io/guides/getting-started/writing-your-first-test"><script data-n-head="ssr" src="/js/removeTrailingSlash.js" type="1a7a89fb45b679b02cdc4570-text/javascript"></script><script data-n-head="ssr" data-hid="gtm-script" type="1a7a89fb45b679b02cdc4570-text/javascript">window._gtm_init||(window._gtm_init=1,function(t,e,n,a,o){t[n]=1==t[n]||"yes"==e[n]||1==e[n]||1==e.msDoNotTrack||t[a]&&t[a][o]&&t[a][o]()?1:0}(window,navigator,"doNotTrack","external","msTrackingProtectionEnabled"),function(a,o,i,g,m){a[m]={},a._gtm_inject=function(t){var e,n;a.doNotTrack||a[m][t]||(a[m][t]=1,a[g]=a[g]||[],a[g].push({"gtm.start":(new Date).getTime(),event:"gtm.js"}),e=o.getElementsByTagName(i)[0],(n=o.createElement(i)).async=!0,n.src="https://www.googletagmanager.com/gtm.js?id="+t,e.parentNode.insertBefore(n,e))},a._gtm_inject("GTM-KNKBWLD")}(window,document,"script","dataLayer","_gtm_ids"))</script><link rel="preload" href="/_nuxt/8b69df9.js" as="script"><link rel="preload" href="/_nuxt/de479ea.js" as="script"><link rel="preload" href="/_nuxt/bd00d3b.js" as="script"><link rel="preload" href="/_nuxt/864ef82.js" as="script"><link rel="preload" href="/_nuxt/3b80929.js" as="script"><link rel="preload" href="/_nuxt/9db1c41.js" as="script"><link rel="preload" href="/_nuxt/2ebfa9d.js" as="script"><link rel="preload" href="/_nuxt/6772fec.js" as="script"><link rel="preload" href="/_nuxt/40813bb.js" as="script"><link rel="preload" href="/_nuxt/1dbf855.js" as="script"><style data-vue-ssr-id="f0380000:0 2fd31201:0 2510624b:0 dfc6ce5a:0 61ffa23d:0 045acdc2:0 170c24bb:0 10a2d612:0 83d42da4:0 4ca738ae:0 3862524a:0 3f3f4cae:0 2c1f64f9:0">/*! tailwindcss v3.0.23 | MIT License | https://tailwindcss.com*/*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;-o-tab-size:4;tab-size:4;font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-size:100%;line-height:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}[type=button],[type=reset],[type=submit],button{-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}textarea{resize:vertical}input::-moz-placeholder,textarea::-moz-placeholder{opacity:1;color:#9ca3af}input:-ms-input-placeholder,textarea:-ms-input-placeholder{opacity:1;color:#9ca3af}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]{display:none}[multiple],[type=date],[type=datetime-local],[type=email],[type=month],[type=number],[type=password],[type=search],[type=tel],[type=text],[type=time],[type=url],[type=week],select,textarea{-webkit-appearance:none;-moz-appearance:none;appearance:none;background-color:#fff;border-color:#6b7280;border-width:1px;border-radius:0;padding-top:.5rem;padding-right:.75rem;padding-bottom:.5rem;padding-left:.75rem;font-size:1rem;line-height:1.5rem;--tw-shadow:0 0 #0000}[multiple]:focus,[type=date]:focus,[type=datetime-local]:focus,[type=email]:focus,[type=month]:focus,[type=number]:focus,[type=password]:focus,[type=search]:focus,[type=tel]:focus,[type=text]:focus,[type=time]:focus,[type=url]:focus,[type=week]:focus,select:focus,textarea:focus{outline:2px solid transparent;outline-offset:2px;--tw-ring-inset:var(--tw-empty, );/*!*//*!*/--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:#2563eb;--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);box-shadow:var(--tw-ring-offset-shadow),var(--tw-ring-shadow),var(--tw-shadow);border-color:#2563eb}input::-moz-placeholder,textarea::-moz-placeholder{color:#6b7280;opacity:1}input:-ms-input-placeholder,textarea:-ms-input-placeholder{color:#6b7280;opacity:1}input::placeholder,textarea::placeholder{color:#6b7280;opacity:1}::-webkit-datetime-edit-fields-wrapper{padding:0}::-webkit-date-and-time-value{min-height:1.5em}::-webkit-datetime-edit,::-webkit-datetime-edit-day-field,::-webkit-datetime-edit-hour-field,::-webkit-datetime-edit-meridiem-field,::-webkit-datetime-edit-millisecond-field,::-webkit-datetime-edit-minute-field,::-webkit-datetime-edit-month-field,::-webkit-datetime-edit-second-field,::-webkit-datetime-edit-year-field{padding-top:0;padding-bottom:0}select{background-image:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");background-position:right .5rem center;background-repeat:no-repeat;background-size:1.5em 1.5em;padding-right:2.5rem;-webkit-print-color-adjust:exact;color-adjust:exact}[multiple]{background-image:initial;background-position:initial;background-repeat:unset;background-size:initial;padding-right:.75rem;-webkit-print-color-adjust:unset;color-adjust:unset}[type=checkbox],[type=radio]{-webkit-appearance:none;-moz-appearance:none;appearance:none;padding:0;-webkit-print-color-adjust:exact;color-adjust:exact;display:inline-block;vertical-align:middle;background-origin:border-box;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;flex-shrink:0;height:1rem;width:1rem;color:#2563eb;background-color:#fff;border-color:#6b7280;border-width:1px;--tw-shadow:0 0 #0000}[type=checkbox]{border-radius:0}[type=radio]{border-radius:100%}[type=checkbox]:focus,[type=radio]:focus{outline:2px solid transparent;outline-offset:2px;--tw-ring-inset:var(--tw-empty, );/*!*//*!*/--tw-ring-offset-width:2px;--tw-ring-offset-color:#fff;--tw-ring-color:#2563eb;--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);box-shadow:var(--tw-ring-offset-shadow),var(--tw-ring-shadow),var(--tw-shadow)}[type=checkbox]:checked,[type=radio]:checked{border-color:transparent;background-color:currentColor;background-size:100% 100%;background-position:center;background-repeat:no-repeat}[type=checkbox]:checked{background-image:url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z'/%3e%3c/svg%3e")}[type=radio]:checked{background-image:url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3ccircle cx='8' cy='8' r='3'/%3e%3c/svg%3e")}[type=checkbox]:checked:focus,[type=checkbox]:checked:hover,[type=radio]:checked:focus,[type=radio]:checked:hover{border-color:transparent;background-color:currentColor}[type=checkbox]:indeterminate{background-image:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 16 16'%3e%3cpath stroke='white' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M4 8h8'/%3e%3c/svg%3e");border-color:transparent;background-color:currentColor;background-size:100% 100%;background-position:center;background-repeat:no-repeat}[type=checkbox]:indeterminate:focus,[type=checkbox]:indeterminate:hover{border-color:transparent;background-color:currentColor}[type=file]{background:unset;border-color:inherit;border-width:0;border-radius:0;padding:0;font-size:unset;line-height:inherit}[type=file]:focus{outline:1px auto -webkit-focus-ring-color}*,::after,::before{--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-scroll-snap-strictness:proximity;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000}.container{width:100%}@media (min-width:640px){.container{max-width:640px}}@media (min-width:768px){.container{max-width:768px}}@media (min-width:1024px){.container{max-width:1024px}}@media (min-width:1280px){.container{max-width:1280px}}@media (min-width:1536px){.container{max-width:1536px}}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0}.fixed{position:fixed}.absolute{position:absolute}.relative{position:relative}.inset-y-0{top:0;bottom:0}.top-0{top:0}.left-0{left:0}.bottom-0{bottom:0}.right-0{right:0}.top-16{top:4rem}.z-20{z-index:20}.float-left{float:left}.clear-both{clear:both}.m-3{margin:.75rem}.m-0{margin:0}.mx-auto{margin-left:auto;margin-right:auto}.mx-8{margin-left:2rem;margin-right:2rem}.-mx-5{margin-left:-1.25rem;margin-right:-1.25rem}.-my-2{margin-top:-.5rem;margin-bottom:-.5rem}.my-8{margin-top:2rem;margin-bottom:2rem}.mx-16{margin-left:4rem;margin-right:4rem}.mb-8{margin-bottom:2rem}.mb-4{margin-bottom:1rem}.mt-16{margin-top:4rem}.mt-5{margin-top:1.25rem}.mt-8{margin-top:2rem}.ml-4{margin-left:1rem}.ml-2{margin-left:.5rem}.mr-1{margin-right:.25rem}.ml-auto{margin-left:auto}.mr-2{margin-right:.5rem}.mb-14{margin-bottom:3.5rem}.mt-4{margin-top:1rem}.block{display:block}.inline{display:inline}.flex{display:flex}.inline-flex{display:inline-flex}.hidden{display:none}.h-full{height:100%}.h-16{height:4rem}.h-8{height:2rem}.h-6{height:1.5rem}.h-5{height:1.25rem}.h-20{height:5rem}.w-full{width:100%}.w-auto{width:auto}.w-6{width:1.5rem}.w-sidebar{width:290px}.w-5{width:1.25rem}.w-3\/6{width:50%}.max-w-7xl{max-width:80rem}.flex-shrink-0{flex-shrink:0}.flex-grow{flex-grow:1}.rotate-90{--tw-rotate:90deg;transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.transform{transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.list-none{list-style-type:none}.flex-row{flex-direction:row}.flex-col{flex-direction:column}.flex-wrap{flex-wrap:wrap}.items-center{align-items:center}.justify-start{justify-content:flex-start}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.justify-around{justify-content:space-around}.space-x-4>:not([hidden])~:not([hidden]){--tw-space-x-reverse:0;margin-right:calc(1rem * var(--tw-space-x-reverse));margin-left:calc(1rem * calc(1 - var(--tw-space-x-reverse)))}.space-y-1>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.25rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.25rem * var(--tw-space-y-reverse))}.space-x-6>:not([hidden])~:not([hidden]){--tw-space-x-reverse:0;margin-right:calc(1.5rem * var(--tw-space-x-reverse));margin-left:calc(1.5rem * calc(1 - var(--tw-space-x-reverse)))}.space-y-4>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1rem * var(--tw-space-y-reverse))}.overflow-hidden{overflow:hidden}.overflow-y-auto{overflow-y:auto}.break-words{overflow-wrap:break-word}.rounded-md{border-radius:.375rem}.rounded-t-md{border-top-left-radius:.375rem;border-top-right-radius:.375rem}.border{border-width:1px}.border-b{border-bottom-width:1px}.border-r{border-right-width:1px}.border-l-2{border-left-width:2px}.border-b-2{border-bottom-width:2px}.border-dotted{border-style:dotted}.border-none{border-style:none}.border-gray-200{--tw-border-opacity:1;border-color:rgb(229 231 235 / var(--tw-border-opacity))}.border-transparent{border-color:transparent}.border-blue{--tw-border-opacity:1;border-color:rgb(54 197 255 / var(--tw-border-opacity))}.border-gray-700{--tw-border-opacity:1;border-color:rgb(55 65 81 / var(--tw-border-opacity))}.bg-gray-800{--tw-bg-opacity:1;background-color:rgb(31 41 55 / var(--tw-bg-opacity))}.bg-gray-900{--tw-bg-opacity:1;background-color:rgb(17 24 39 / var(--tw-bg-opacity))}.bg-gray-700{--tw-bg-opacity:1;background-color:rgb(55 65 81 / var(--tw-bg-opacity))}.bg-lightGray{--tw-bg-opacity:1;background-color:rgb(249 252 251 / var(--tw-bg-opacity))}.bg-green{--tw-bg-opacity:1;background-color:rgb(4 195 141 / var(--tw-bg-opacity))}.bg-white{--tw-bg-opacity:1;background-color:rgb(255 255 255 / var(--tw-bg-opacity))}.stroke-current{stroke:currentColor}.p-2{padding:.5rem}.px-2{padding-left:.5rem;padding-right:.5rem}.px-3{padding-left:.75rem;padding-right:.75rem}.py-2{padding-top:.5rem;padding-bottom:.5rem}.py-3{padding-top:.75rem;padding-bottom:.75rem}.py-12{padding-top:3rem;padding-bottom:3rem}.px-4{padding-left:1rem;padding-right:1rem}.px-5{padding-left:1.25rem;padding-right:1.25rem}.py-1{padding-top:.25rem;padding-bottom:.25rem}.pb-2{padding-bottom:.5rem}.pt-2{padding-top:.5rem}.pb-3{padding-bottom:.75rem}.pl-3{padding-left:.75rem}.pr-3{padding-right:.75rem}.pt-16{padding-top:4rem}.pr-16{padding-right:4rem}.pl-4{padding-left:1rem}.pr-8{padding-right:2rem}.pb-8{padding-bottom:2rem}.pt-4{padding-top:1rem}.pb-1{padding-bottom:.25rem}.pl-1{padding-left:.25rem}.pl-2{padding-left:.5rem}.pb-4{padding-bottom:1rem}.pr-1{padding-right:.25rem}.pr-2{padding-right:.5rem}.text-left{text-align:left}.text-center{text-align:center}.font-mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}.text-2xl{font-size:1.5rem;line-height:2rem}.text-base{font-size:1rem;line-height:1.5rem}.text-xl{font-size:1.25rem;line-height:1.75rem}.text-sm{font-size:.875rem;line-height:1.25rem}.text-lg{font-size:1.125rem;line-height:1.75rem}.font-bold{font-weight:700}.font-medium{font-weight:500}.font-extrabold{font-weight:800}.italic{font-style:italic}.leading-5{line-height:1.25rem}.text-blue{--tw-text-opacity:1;color:rgb(16 121 195 / var(--tw-text-opacity))}.text-white{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity))}.text-gray-300{--tw-text-opacity:1;color:rgb(209 213 219 / var(--tw-text-opacity))}.text-gray-400{--tw-text-opacity:1;color:rgb(156 163 175 / var(--tw-text-opacity))}.text-gray-500{--tw-text-opacity:1;color:rgb(107 114 128 / var(--tw-text-opacity))}.text-gray-600{--tw-text-opacity:1;color:rgb(75 85 99 / var(--tw-text-opacity))}.underline{-webkit-text-decoration-line:underline;text-decoration-line:underline}.no-underline{-webkit-text-decoration-line:none;text-decoration-line:none}.placeholder-gray-400::-moz-placeholder{--tw-placeholder-opacity:1;color:rgb(156 163 175 / var(--tw-placeholder-opacity))}.placeholder-gray-400:-ms-input-placeholder{--tw-placeholder-opacity:1;color:rgb(156 163 175 / var(--tw-placeholder-opacity))}.placeholder-gray-400::placeholder{--tw-placeholder-opacity:1;color:rgb(156 163 175 / var(--tw-placeholder-opacity))}.outline{outline-style:solid}.filter{filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.transition-colors{transition-property:color,background-color,border-color,fill,stroke,-webkit-text-decoration-color;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,-webkit-text-decoration-color;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:150ms}.transition{transition-property:color,background-color,border-color,fill,stroke,opacity,box-shadow,transform,filter,-webkit-text-decoration-color,-webkit-backdrop-filter;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter,-webkit-text-decoration-color,-webkit-backdrop-filter;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:150ms}.duration-150{transition-duration:150ms}.ease-in-out{transition-timing-function:cubic-bezier(.4,0,.2,1)}.hover\:border-transparent:hover{border-color:transparent}.hover\:bg-gray-700:hover{--tw-bg-opacity:1;background-color:rgb(55 65 81 / var(--tw-bg-opacity))}.hover\:bg-gray-50:hover{--tw-bg-opacity:1;background-color:rgb(249 250 251 / var(--tw-bg-opacity))}.hover\:text-white:hover{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity))}.hover\:text-gray-900:hover{--tw-text-opacity:1;color:rgb(17 24 39 / var(--tw-text-opacity))}.hover\:text-gray-500:hover{--tw-text-opacity:1;color:rgb(107 114 128 / var(--tw-text-opacity))}.hover\:text-green:hover{--tw-text-opacity:1;color:rgb(18 116 88 / var(--tw-text-opacity))}.focus\:border-white:focus{--tw-border-opacity:1;border-color:rgb(255 255 255 / var(--tw-border-opacity))}.focus\:bg-white:focus{--tw-bg-opacity:1;background-color:rgb(255 255 255 / var(--tw-bg-opacity))}.focus\:text-gray-900:focus{--tw-text-opacity:1;color:rgb(17 24 39 / var(--tw-text-opacity))}.focus\:outline-none:focus{outline:2px solid transparent;outline-offset:2px}.focus\:ring-2:focus{--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);box-shadow:var(--tw-ring-offset-shadow),var(--tw-ring-shadow),0 0 #0000;box-shadow:var(--tw-ring-offset-shadow),var(--tw-ring-shadow),var(--tw-shadow,0 0 #0000)}.focus\:ring-inset:focus{--tw-ring-inset:inset}.focus\:ring-white:focus{--tw-ring-opacity:1;--tw-ring-color:rgb(255 255 255 / var(--tw-ring-opacity))}.group:hover .group-hover\:text-gray-400{--tw-text-opacity:1;color:rgb(156 163 175 / var(--tw-text-opacity))}.dark .dark\:text-gray-300{--tw-text-opacity:1;color:rgb(209 213 219 / var(--tw-text-opacity))}@media (min-width:640px){.sm\:ml-2{margin-left:.5rem}.sm\:inline-block{display:inline-block}.sm\:px-4{padding-left:1rem;padding-right:1rem}.sm\:px-6{padding-left:1.5rem;padding-right:1.5rem}.sm\:px-16{padding-left:4rem;padding-right:4rem}.sm\:text-center{text-align:center}.sm\:text-sm{font-size:.875rem;line-height:1.25rem}}@media (min-width:1024px){.lg\:z-10{z-index:10}.lg\:col-span-3{grid-column:span 3/span 3}.lg\:m-0{margin:0}.lg\:ml-6{margin-left:1.5rem}.lg\:block{display:block}.lg\:flex{display:flex}.lg\:hidden{display:none}.lg\:w-1\/5{width:20%}.lg\:w-sidebar{width:290px}.lg\:px-8{padding-left:2rem;padding-right:2rem}.lg\:px-0{padding-left:0;padding-right:0}}@media (min-width:1280px){.xl\:col-span-2{grid-column:span 2/span 2}.xl\:block{display:block}}:root{--font-color-black:#2e3138}[id]{scroll-margin-top:5.5rem}.app-sidebar{background-color:#f9fcfb;border-right:1px solid #f0f3f2}.main-content{width:100%}@media (min-width:1024px){.main-content{display:grid}.main-content{grid-template-columns:repeat(12,minmax(0,1fr))}.main-content{gap:2rem}}.banner-margin{padding-top:88px}@media (min-width:640px){.banner-margin{padding-top:64px}}@media (min-width:768px){.banner-margin{padding-top:48px}}.main-content-article-wrapper{width:100%;position:relative;margin-top:0;margin-bottom:0;display:flex;flex-direction:row;justify-content:center}@media (min-width:1024px){.main-content-article-wrapper{grid-column:span 9/span 9}}@media (min-width:1280px){.main-content-article-wrapper{grid-column:span 8/span 8}}.main-content-article-wrapper{margin-top:4rem}@media (min-width:1024px){.main-content-article-wrapper{z-index:0}}.main-content-article{flex:1;overflow:scroll;max-width:900px;padding-left:1rem;padding-right:1rem}@media (min-width:768px){.main-content-article{padding-left:2rem;padding-right:2rem}}@media (min-width:1024px){.main-content-article{padding-left:4rem;padding-right:4rem}.main-content-article{margin-left:.5rem;margin-right:.5rem}}@media (min-width:1280px){.main-content-article{padding-left:8rem;padding-right:6rem}}.main-content-title{border-bottom-width:1px;border-bottom-color:#eee;color:#2e3138;color:var(--font-color-black);font-size:1.875rem;line-height:2.25rem;font-weight:700;margin-top:2.5rem;margin-bottom:1.5rem;padding-bottom:.75rem}@media (min-width:768px){.main-content-title{font-size:3rem;line-height:1}.main-content-title{margin-top:3.5rem}}.hide-scroll{-ms-overflow-style:none;scrollbar-width:none}.hide-scroll::-webkit-scrollbar{display:none}.nuxt-content img{border:1px solid #ddd;box-shadow:0 1px 2px #ddd;width:auto;height:auto;margin-top:1rem;margin-bottom:1rem;max-width:100%}.nuxt-content h1,.nuxt-content h2,.nuxt-content h3,.nuxt-content h4,.nuxt-content h5,.nuxt-content h6,.nuxt-content li,.nuxt-content p,.nuxt-content td,.nuxt-content th{color:var(--font-color-black)}.nuxt-content strong{font-weight:600}.nuxt-content>h1{border-bottom-width:1px;border-bottom-color:#eee;color:#2e3138;font-weight:700;font-size:1.875rem;line-height:2.25rem;margin-top:4rem;margin-bottom:1.5rem;padding-bottom:.75rem}.nuxt-content h2{font-weight:700}.nuxt-content h1>svg,.nuxt-content h2>svg,.nuxt-content h3>svg,.nuxt-content>svg{margin-right:.5rem}.nuxt-content>h2{border-bottom-width:1px;border-bottom-color:#eee;margin-top:2rem;font-size:1.875rem;line-height:2.25rem}.nuxt-content>h2,.nuxt-content>h3,.nuxt-content>h4{border-bottom-color:#eee}.nuxt-content>h2,.nuxt-content>h3,.nuxt-content>h4{margin-bottom:1.5rem;padding-bottom:.5rem;border-bottom-width:1px}.nuxt-content>h3{font-size:1.5rem;line-height:2rem;font-weight:700;margin-top:2rem}.nuxt-content>h4{font-size:1.25rem;line-height:1.75rem;font-weight:500}.nuxt-content h2>em,.nuxt-content h3>em,.nuxt-content h4>em,.nuxt-content h5>em{margin-left:.5rem;margin-right:.5rem}.nuxt-content h2:before,.nuxt-content h3:before,.nuxt-content h4:before{content:" "}.nuxt-content h2:before,.nuxt-content h3:before,.nuxt-content h4:before{display:block;visibility:hidden;pointer-events:none}.nuxt-content h2>a:first-of-type:before,.nuxt-content h3>a:first-of-type:before,.nuxt-content h4>a:first-of-type:before{content:"#";color:#1079c3;margin-left:-1.25rem;--text-opacity:1}.nuxt-content h2>a:first-of-type:before,.nuxt-content h3>a:first-of-type:before,.nuxt-content h4>a:first-of-type:before{font-weight:400;font-size:1.25rem;line-height:1.75rem;padding-right:.5rem;opacity:0}.nuxt-content h2:hover>a:first-of-type:before,.nuxt-content h3:hover>a:first-of-type:before,.nuxt-content h4:hover>a:first-of-type:before{opacity:1}.nuxt-content blockquote{border-left-width:4px;padding-left:3rem;padding-right:3rem;padding-top:1.5rem;padding-bottom:1.5rem;--tw-bg-opacity:1;background-color:rgb(243 244 246 / var(--tw-bg-opacity));margin-bottom:2rem;font-style:italic}.nuxt-content>p{margin-bottom:0}.nuxt-content svg,.toc-content svg{height:1em;width:1em}.nuxt-content svg,.toc-content svg{display:inline-block}.nuxt-content p{font-size:1.125rem;line-height:1.75rem;margin-bottom:1.25rem}.nuxt-content li>code,.nuxt-content p>code{color:#000}.nuxt-content a>code,.nuxt-content h2>code,.nuxt-content h3>code,.nuxt-content li>code,.nuxt-content p>code,.nuxt-content td>code{font-weight:400;font-size:.875em;background-color:#f7fafc;padding-left:.15rem;padding-right:.15rem;border-width:1px;border-color:#edf2f7;border-radius:.25rem}.nuxt-content h2>code,.nuxt-content h3>code{margin-left:.5rem;margin-right:.5rem}.nuxt-content a{color:#1079c3;text-decoration:none;border-bottom:1px dotted #1079c3}.nuxt-content a:hover{border-bottom-style:solid}.nuxt-content strong>em{border-bottom:1px dotted #ccc;font-style:normal;font-weight:700}.nuxt-content ol,.nuxt-content ul{margin-left:2rem}.nuxt-content ul{list-style-type:disc}.nuxt-content ol{list-style-type:decimal}.nuxt-content li{font-weight:400;font-size:1.125rem;line-height:1.75rem;margin-top:1rem;margin-bottom:1rem}.nuxt-content pre{margin-bottom:1.5rem}.nuxt-content table{table-layout:auto;margin-bottom:1.25rem}.nuxt-content td,.nuxt-content th{border-width:1px;padding-left:1rem;padding-right:1rem;padding-top:.5rem;padding-bottom:.5rem}.nuxt-content tr:nth-child(2n){--tw-bg-opacity:1;background-color:rgb(243 244 246 / var(--tw-bg-opacity))}.nuxt-content-highlight{margin-bottom:1.25rem}.nuxt-content-highlight .line-numbers{border-radius:6px}code[class*=language-] ::-moz-selection,code[class*=language-]::-moz-selection,pre[class*=language-] ::-moz-selection,pre[class*=language-]::-moz-selection{background:#4f5b66!important}code[class*=language-] ::-moz-selection,code[class*=language-]::-moz-selection,pre[class*=language-] ::-moz-selection,pre[class*=language-]::-moz-selection{background:#4f5b66!important}code[class*=language-] ::selection,code[class*=language-]::selection,pre[class*=language-] ::selection,pre[class*=language-]::selection{background:#4f5b66!important}span.token.keyword.control-flow{font-style:normal}@media only percy{.nuxt-content:after{content:"";display:block;position:absolute;top:0;left:0;width:100%;height:100%;background:#fca2a2}}.svg-inline--fa{display:inline-block;font-size:inherit;height:1em;vertical-align:-.125em}code[class*=language-],pre[class*=language-]{text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;color:#c3cee3;background:#263238;font-family:Roboto Mono,monospace;font-size:1em;line-height:1.5em;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-hyphens:none;-ms-hyphens:none;hyphens:none}code[class*=language-] ::-moz-selection,code[class*=language-]::-moz-selection,pre[class*=language-] ::-moz-selection,pre[class*=language-]::-moz-selection{background:#363636}code[class*=language-] ::-moz-selection,code[class*=language-]::-moz-selection,pre[class*=language-] ::-moz-selection,pre[class*=language-]::-moz-selection{background:#363636}code[class*=language-] ::selection,code[class*=language-]::selection,pre[class*=language-] ::selection,pre[class*=language-]::selection{background:#363636}:not(pre)>code[class*=language-]{white-space:normal;border-radius:.2em;padding:.1em}pre[class*=language-]{overflow:auto;position:relative;margin:.5em 0;padding:1.25em 1em}.language-css>code,.language-sass>code,.language-scss>code{color:#fd9170}[class*=language-] .namespace{opacity:.7}.token.atrule{color:#c792ea}.token.attr-name{color:#ffcb6b}.token.attr-value,.token.attribute{color:#c3e88d}.token.boolean{color:#c792ea}.token.builtin{color:#ffcb6b}.token.cdata,.token.char{color:#80cbc4}.token.class{color:#ffcb6b}.token.class-name,.token.color{color:#f2ff00}.token.comment{color:#546e7a}.token.constant{color:#c792ea}.token.deleted{color:#f07178}.token.doctype{color:#546e7a}.token.entity{color:#f07178}.token.function{color:#c792ea}.token.hexcode{color:#f2ff00}.token.id,.token.important{color:#c792ea;font-weight:700}.token.inserted{color:#80cbc4}.token.keyword{color:#c792ea;font-style:italic}.token.number{color:#fd9170}.token.operator{color:#89ddff}.token.prolog{color:#546e7a}.token.property{color:#80cbc4}.token.pseudo-class,.token.pseudo-element{color:#c3e88d}.token.punctuation{color:#89ddff}.token.regex{color:#f2ff00}.token.selector{color:#f07178}.token.string{color:#c3e88d}.token.symbol{color:#c792ea}.token.tag,.token.unit{color:#f07178}.token.url{color:#fd9170}.token.variable{color:#f07178}.nuxt-progress{position:fixed;top:0;left:0;right:0;height:2px;width:0;opacity:1;transition:width .1s,opacity .4s;background-color:#000;z-index:999999}.nuxt-progress.nuxt-progress-notransition{transition:none}.nuxt-progress-failed{background-color:red}html{font-family:"Source Sans Pro",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;font-size:16px;word-spacing:1px;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;box-sizing:border-box}*,:after,:before{box-sizing:border-box;margin:0}.app-content{display:flex}.button--green{display:inline-block;border-radius:4px;border:1px solid #3b8070;color:#3b8070;text-decoration:none;padding:10px 30px}.button--green:hover{color:#fff;background-color:#3b8070}.button--grey{display:inline-block;border-radius:4px;border:1px solid #35495e;color:#35495e;text-decoration:none;padding:10px 30px;margin-left:15px}.button--grey:hover{color:#fff;background-color:#35495e}.DocSearch{--docsearch-primary-color:#1dbe89;--docsearch-highlight-color:var(--docsearch-primary-color);--docsearch-text-color:#374151;--docsearch-modal-background:#f3f4f6;--docsearch-searchbox-shadow:inset 0 0 0 1px var(--docsearch-muted-color);--docsearch-searchbox-background:#e5e7eb;--docsearch-searchbox-focus-background:#fff;--docsearch-hit-color:#000;--docsearch-hit-active-color:#fff;--docsearch-muted-color:#969faf;--docsearch-logo-color:var(--docsearch-muted-color);--docsearch-container-background:rgba(153,155,165,0.8)}.DocSearch-MagnifierLabel,.DocSearch-Reset{color:var(--docsearch-muted-color)!important}.DocSearch-Hit-source{color:#000!important}.DocSearch-Button{top:0!important;bottom:0!important;left:0!important;display:flex!important;width:100%!important;align-items:center!important;justify-content:flex-start!important;border-radius:.375rem!important;border-width:1px!important;border-color:transparent!important;--tw-bg-opacity:1!important;background-color:rgb(55 65 81 / var(--tw-bg-opacity))!important;padding-top:.5rem!important;padding-bottom:.5rem!important;padding-left:.75rem!important;padding-right:.75rem!important;line-height:1.25rem!important;--tw-text-opacity:1!important;color:rgb(209 213 219 / var(--tw-text-opacity))!important}.DocSearch-Button::-moz-placeholder{--tw-placeholder-opacity:1!important;color:rgb(156 163 175 / var(--tw-placeholder-opacity))!important}.DocSearch-Button:-ms-input-placeholder{--tw-placeholder-opacity:1!important;color:rgb(156 163 175 / var(--tw-placeholder-opacity))!important}.DocSearch-Button::placeholder{--tw-placeholder-opacity:1!important;color:rgb(156 163 175 / var(--tw-placeholder-opacity))!important}.DocSearch-Button:focus{--tw-border-opacity:1!important;border-color:rgb(255 255 255 / var(--tw-border-opacity))!important;--tw-bg-opacity:1!important;background-color:rgb(255 255 255 / var(--tw-bg-opacity))!important;--tw-text-opacity:1!important;color:rgb(17 24 39 / var(--tw-text-opacity))!important;outline:2px solid transparent!important;outline-offset:2px!important;--tw-ring-opacity:1!important;--tw-ring-color:rgb(255 255 255 / var(--tw-ring-opacity))!important}@media (min-width:640px){.DocSearch-Button{font-size:.875rem!important;line-height:1.25rem!important}}.DocSearch-Button:active,.DocSearch-Button:focus,.DocSearch-Button:hover{box-shadow:inset 0 0 0 2px #374151!important}.DocSearch-Button .DocSearch-Search-Icon{color:inherit!important}.DocSearch-Hits mark{color:#fff!important;background-color:var(--docsearch-primary-color)!important}.DocSearch-Button-Placeholder{padding-left:.75rem!important;padding-right:.75rem!important}.DocSearch-Screen-Icon>svg{display:inline!important}.DocSearch-Input{--tw-ring-shadow:none!important}.dark-mode .DocSearch{--docsearch-text-color:var(--color-gray-300);--docsearch-container-background:rgba(9,10,17,0.8);--docsearch-modal-background:var(--color-gray-900);--docsearch-modal-shadow:inset 1px 1px 0 0 #2c2e40,0 3px 8px 0 #000309;--docsearch-searchbox-background:var(--color-gray-800);--docsearch-searchbox-focus-background:var(--color-gray-800);--docsearch-hit-color:var(--color-gray-300);--docsearch-hit-shadow:none;--docsearch-hit-background:var(--color-gray-800);--docsearch-key-gradient:linear-gradient(-26.5deg,#565872,#31355b);--docsearch-key-shadow:inset 0 -2px 0 0 #282d55,inset 0 0 1px 1px #51577d,0 2px 2px 0 rgba(3,4,9,0.3);--docsearch-footer-background:var(--color-gray-800);--docsearch-footer-shadow:inset 0 1px 0 0 rgba(73,76,106,0.5),0 -4px 8px 0 rgba(0,0,0,0.2);--docsearch-logo-color:#fff;--docsearch-muted-color:var(--color-gray-500)}.bannerMargin_GEbhF{margin-top:80px}.active-sidebar-link[data-v-75d0940e]{color:#127458;background-color:#cff1e6}.alert_LKj6V{background-color:#f2f2f2;border-color:#006eff;padding:1.25rem;border-left-width:4px;--tw-border-opacity:1;border-color:rgb(75 85 99 / var(--tw-border-opacity));padding-left:3rem;padding-right:3rem;padding-top:1.5rem;padding-bottom:1.5rem;margin-bottom:2rem}.alert_LKj6V>:last-child{margin-bottom:0}.info_2I0eB{border-left-color:#2a98b9;background-color:#f2fafd}.info_2I0eB .alert-header,.info_2I0eB a{color:#2a98b9}.info_2I0eB a{border-bottom-color:#2a98b9}.info_2I0eB a>code{color:#2a98b9}h2{font-size:1.25rem;line-height:1.75rem}.alert_LKj6V h1.alert-header{display:block;font-size:1.125rem;line-height:1.75rem;font-weight:500}.alert_LKj6V h2,.alert_LKj6V h3,.alert_LKj6V h4,.alert_LKj6V h5{font-size:1.25rem;line-height:1.75rem;display:flex;flex-direction:row;align-items:center;font-weight:700;margin-bottom:1rem}.alert_LKj6V h2,.alert_LKj6V h3,.alert_LKj6V h4,.alert_LKj6V h5 .badge_c7Doy{margin-left:.5rem}.alert_LKj6V h2>svg,.alert_LKj6V h3>svg,.alert_LKj6V h4>svg,.alert_LKj6V h5>svg{height:1.75rem;width:1.75rem;margin-right:.5rem}.alert_LKj6V ul{list-style-type:disc}.alert_LKj6V li{font-weight:400;margin-top:1rem;margin-bottom:1rem}.alert_LKj6V>code{background-color:#dcf1f7}.success_V\+9lm{border-left-color:#00bf88;background-color:#f1fdf9}.success_V\+9lm .alert-header,.success_V\+9lm a{color:#00bf88}.success_V\+9lm a{border-bottom-color:#00bf88}.success_V\+9lm>code{background-color:#cff1e6}.success_V\+9lm a>code{color:#00bf88}.warning_iUVdm{border-left-color:#f0ad4e;background-color:#fffbf5}.warning_iUVdm .alert-header,.warning_iUVdm a{color:#f0ad4e}.warning_iUVdm a{border-bottom-color:#f0ad4e}.warning_iUVdm>code{background-color:#f7ebd7}.warning_iUVdm a>code{color:#f0ad4e}.danger_gpGHD{border-left-color:#d9534f;background-color:#fff2f2}.danger_gpGHD .alert-header,.danger_gpGHD a{color:#de5e5a}.danger_gpGHD a{border-bottom-color:#de5e5a}.danger_gpGHD>code{background-color:#f5e4e4}.danger_gpGHD a>code{color:#de5e5a}.docsVideo_JyhYd{margin-bottom:1rem}@media (min-width:1280px){.docsVideo_JyhYd{min-height:380px}}.embedContainer_\+j-Zf{position:relative;padding-bottom:56.25%;overflow:hidden;max-width:100%;height:auto;margin-bottom:1rem;box-shadow:0 0 3px rgba(0,0,0,.3);border:1px solid #ddd}.embedContainer_\+j-Zf embed,.embedContainer_\+j-Zf iframe,.embedContainer_\+j-Zf object{position:absolute;top:0;left:0;width:100%;height:100%}.docsImage_1KPA0{margin-bottom:1rem}.imageNoBorder_F8E7t{border:none!important;box-shadow:none!important}.bannerMargin_hOh9B{padding-top:64px}.tocHeading_X0ZME{margin-bottom:.5rem;padding-top:1.25rem;--tw-text-opacity:1;color:rgb(107 114 128 / var(--tw-text-opacity));text-transform:uppercase;letter-spacing:.05em;font-weight:700;font-size:.75rem;line-height:1rem}.scrollactiveItemActive_vn9Qn{border-color:#04c38d;--tw-text-opacity:1;color:rgb(107 114 128 / var(--tw-text-opacity));font-weight:700;border-left-width:4px}</style><link rel="preload" href="/_nuxt/static/1652113017/guides/getting-started/writing-your-first-test/state.js" as="script"><link rel="preload" href="/_nuxt/static/1652113017/guides/getting-started/writing-your-first-test/payload.js" as="script"><link rel="preload" href="/_nuxt/static/1652113017/manifest.js" as="script">
+  </head>
+  <body>
+    <noscript data-n-head="ssr" data-hid="gtm-noscript" data-pbody="true"><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KNKBWLD&" height="0" width="0" style="display:none;visibility:hidden" title="gtm"></iframe></noscript><div data-server-rendered="true" id="__nuxt"><!----><div><div class="app-content"><div class="w-full"><div><nav class="w-full bg-gray-800 fixed top-0 left-0 overflow-y-auto z-20"><!----> <div class="mx-auto px-2 sm:px-4 lg:px-8"><div class="relative flex items-center justify-between h-16"><div class="flex items-center px-2 lg:px-0"><div class="flex-shrink-0"><a href="/"><img src="/_nuxt/img/cypress-logo.a6a3024.png" alt="Cypress Docs Logo" class="block h-8 w-auto"></a></div> <div class="hidden lg:block lg:ml-6"><div class="flex space-x-4"><a href="/guides/overview/why-cypress" class="px-3 py-2 rounded-md text-md font-bold bg-gray-700 text-white">
+                Guides
+              </a><a href="/api/table-of-contents" class="px-3 py-2 rounded-md text-md font-bold hover:bg-gray-700 hover:text-white text-gray-300">
+                API
+              </a><a href="/plugins" class="px-3 py-2 rounded-md text-md font-bold hover:bg-gray-700 hover:text-white text-gray-300">
+                Plugins
+              </a><a href="/examples/examples/recipes" class="px-3 py-2 rounded-md text-md font-bold hover:bg-gray-700 hover:text-white text-gray-300">
+                Examples
+              </a><a href="/faq/questions/using-cypress-faq" class="px-3 py-2 rounded-md text-md font-bold hover:bg-gray-700 hover:text-white text-gray-300">
+                FAQ
+              </a> <a href="https://learn.cypress.io" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-md font-bold"><span class="sr-only">Learn</span>
+                Learn
+              </a> <a href="https://github.com/cypress-io/cypress" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-md font-bold"><span class="sr-only">GitHub</span> <svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="github" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512" class="svg-inline--fa fa-github" style="color:inherit"><path fill="currentColor" d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg></a></div></div></div> <div id="docsearch" class="w-full mx-8 lg:m-0 lg:w-1/5"></div> <div class="flex lg:hidden"><button aria-expanded="false" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"><span class="sr-only">Open main menu</span> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true" class="block h-6 w-6 stroke-current text-white"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true" class="hidden h-6 w-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button></div></div></div> <div class="lg:hidden overflow-y-auto hidden"><div class="px-2 pt-2 pb-3 space-y-1"><a href="/guides/overview/why-cypress" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+          Guides
+        </a><a href="/api/table-of-contents" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+          API
+        </a><a href="/plugins" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+          Plugins
+        </a><a href="/examples/examples/recipes" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+          Examples
+        </a><a href="/faq/questions/using-cypress-faq" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+          FAQ
+        </a> <a href="https://learn.cypress.io" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+          Learn
+        </a> <a href="https://github.com/cypress-io/cypress" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+          GitHub
+        </a> <div name="overview"><h3 class="text-gray-300 block px-3 py-2 rounded-md text-base font-extrabold">
+    Overview
+  </h3> <ul><li><div><a href="/guides/overview/why-cypress" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+          Why Cypress?
+        </a></div></li><li><div><a href="/guides/overview/key-differences" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+          Key Differences
+        </a></div></li></ul></div><div name="getting-started"><h3 class="text-gray-300 block px-3 py-2 rounded-md text-base font-extrabold">
+    Getting Started
+  </h3> <ul><li><div><a href="/guides/getting-started/installing-cypress" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+          Installing Cypress
+        </a></div></li><li><div><a href="/guides/getting-started/writing-your-first-test" aria-current="page" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium nuxt-link-exact-active nuxt-link-active">
+          Writing Your First Test
+        </a></div></li><li><div><a href="/guides/getting-started/testing-your-app" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+          Testing Your App
+        </a></div></li></ul></div><div name="core-concepts"><h3 class="text-gray-300 block px-3 py-2 rounded-md text-base font-extrabold">
+    Core Concepts
+  </h3> <ul><li><div><a href="/guides/core-concepts/introduction-to-cypress" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+          Introduction to Cypress
+        </a></div></li><li><div><a href="/guides/core-concepts/writing-and-organizing-tests" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+          Writing and Organizing Tests
+        </a></div></li><li><div><a href="/guides/core-concepts/retry-ability" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+          Retry-ability
+        </a></div></li><li><div><a href="/guides/core-concepts/interacting-with-elements" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+          Interacting with Elements
+        </a></div></li><li><div><a href="/guides/core-concepts/variables-and-aliases" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+          Variables and Aliases
+        </a></div></li><li><div><a href="/guides/core-concepts/conditional-testing" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+          Conditional Testing
+        </a></div></li><li><div><a href="/guides/core-concepts/test-runner" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+          The Test Runner
+        </a></div></li><li><div><a href="/guides/core-concepts/cypress-studio" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+          Cypress Studio
+        </a></div></li></ul></div><div name="dashboard"><h3 class="text-gray-300 block px-3 py-2 rounded-md text-base font-extrabold">
+    Dashboard
+  </h3> <ul><li><div><a href="/guides/dashboard/introduction" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+          Introduction
+        </a></div></li><li><div><a href="/guides/dashboard/projects" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+          Projects
+        </a></div></li><li><div><a href="/guides/dashboard/runs" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+          Runs
+        </a></div></li><li><div><a href="/guides/dashboard/organizations" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+          Organizations
+        </a></div></li><li><div><a href="/guides/dashboard/users" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+          Users
+        </a></div></li><li><div><a href="/guides/dashboard/bitbucket-integration" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+          Bitbucket Integration
+        </a></div></li><li><div><a href="/guides/dashboard/github-integration" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+          GitHub Integration
+        </a></div></li><li><div><a href="/guides/dashboard/gitlab-integration" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+          GitLab Integration
+        </a></div></li><li><div><a href="/guides/dashboard/jira-integration" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+          Jira Integration
+        </a></div></li><li><div><a href="/guides/dashboard/slack-integration" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+          Slack Integration
+        </a></div></li><li><div><a href="/guides/dashboard/analytics" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+          Analytics
+        </a></div></li><li><div><a href="/guides/dashboard/flaky-test-management" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+          Flaky Test Management
+        </a></div></li><li><div><a href="/guides/dashboard/smart-orchestration" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+          Smart Orchestration
+        </a></div></li></ul></div><div name="guides"><h3 class="text-gray-300 block px-3 py-2 rounded-md text-base font-extrabold">
+    Guides
+  </h3> <ul><li><div><a href="/guides/guides/command-line" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+          Command Line
+        </a></div></li><li><div><a href="/guides/guides/module-api" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+          Module API
+        </a></div></li><li><div><a href="/guides/guides/debugging" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+          Debugging
+        </a></div></li><li><div><a href="/guides/guides/network-requests" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+          Network Requests
+        </a></div></li><li><div><a href="/guides/guides/test-retries" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+          Test Retries
+        </a></div></li><li><div><a href="/guides/guides/parallelization" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+          Parallelization
+        </a></div></li><li><div><a href="/guides/guides/environment-variables" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+          Environment Variables
+        </a></div></li><li><div><a href="/guides/guides/stubs-spies-and-clocks" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+          Stubs, Spies, and Clocks
+        </a></div></li><li><div><a href="/guides/guides/screenshots-and-videos" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+          Screenshots and Videos
+        </a></div></li><li><div><a href="/guides/guides/launching-browsers" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+          Launching Browsers
+        </a></div></li><li><div><a href="/guides/guides/cross-browser-testing" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+          Cross Browser Testing
+        </a></div></li><li><div><a href="/guides/guides/web-security" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+          Web Security
+        </a></div></li></ul></div><div name="testing-strategies"><h3 class="text-gray-300 block px-3 py-2 rounded-md text-base font-extrabold">
+    Testing Strategies
+  </h3> <ul><li><div><a href="/guides/testing-strategies/auth0-authentication" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+          Auth0 Authentication
+        </a></div></li><li><div><a href="/guides/testing-strategies/amazon-cognito-authentication" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+          Amazon Cognito Authentication
+        </a></div></li><li><div><a href="/guides/testing-strategies/okta-authentication" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+          Okta Authentication
+        </a></div></li><li><div><a href="/guides/testing-strategies/google-authentication" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+          Google Authentication
+        </a></div></li><li><div><a href="/guides/testing-strategies/working-with-graphql" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+          Working with GraphQL
+        </a></div></li></ul></div><div name="continuous-integration"><h3 class="text-gray-300 block px-3 py-2 rounded-md text-base font-extrabold">
+    Continuous Integration
+  </h3> <ul><li><div><a href="/guides/continuous-integration/introduction" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+          Introduction
+        </a></div></li><li><div><a href="/guides/continuous-integration/ci-provider-examples" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+          CI Provider Examples
+        </a></div></li><li><div><a href="/guides/continuous-integration/circleci" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+          CircleCI
+        </a></div></li><li><div><a href="/guides/continuous-integration/github-actions" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+          GitHub Actions
+        </a></div></li><li><div><a href="/guides/continuous-integration/gitlab-ci" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+          GitLab CI
+        </a></div></li><li><div><a href="/guides/continuous-integration/bitbucket-pipelines" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+          Bitbucket Pipelines
+        </a></div></li><li><div><a href="/guides/continuous-integration/aws-codebuild" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+          AWS CodeBuild
+        </a></div></li></ul></div><div name="component-testing"><h3 class="text-gray-300 block px-3 py-2 rounded-md text-base font-extrabold">
+    Component Testing
+  </h3> <ul><li><div><a href="/guides/component-testing/introduction" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+          Introduction
+        </a></div></li><li><div><a href="/guides/component-testing/framework-configuration" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+          Framework Configuration
+        </a></div></li></ul></div><div name="migrating-to-cypress"><h3 class="text-gray-300 block px-3 py-2 rounded-md text-base font-extrabold">
+    Migrating to Cypress
+  </h3> <ul><li><div><a href="/guides/migrating-to-cypress/protractor" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+          Protractor
+        </a></div></li></ul></div><div name="tooling"><h3 class="text-gray-300 block px-3 py-2 rounded-md text-base font-extrabold">
+    Tooling
+  </h3> <ul><li><div><a href="/guides/tooling/IDE-integration" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+          IDE Integration
+        </a></div></li><li><div><a href="/guides/tooling/plugins-guide" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+          Plugins
+        </a></div></li><li><div><a href="/guides/tooling/reporters" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+          Reporters
+        </a></div></li><li><div><a href="/guides/tooling/typescript-support" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+          TypeScript
+        </a></div></li><li><div><a href="/guides/tooling/visual-testing" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+          Visual Testing
+        </a></div></li><li><div><a href="/guides/tooling/code-coverage" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+          Code Coverage
+        </a></div></li></ul></div><div name="references"><h3 class="text-gray-300 block px-3 py-2 rounded-md text-base font-extrabold">
+    References
+  </h3> <ul><li><div><a href="/guides/references/assertions" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+          Assertions
+        </a></div></li><li><div><a href="/guides/references/configuration" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+          Configuration
+        </a></div></li><li><div><a href="/guides/references/client-certificates" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+          Client Certificates
+        </a></div></li><li><div><a href="/guides/references/proxy-configuration" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+          Proxy Configuration
+        </a></div></li><li><div><a href="/guides/references/best-practices" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+          Best Practices
+        </a></div></li><li><div><a href="/guides/references/error-messages" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+          Error Messages
+        </a></div></li><li><div><a href="/guides/references/bundled-tools" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+          Bundled Tools
+        </a></div></li><li><div><a href="/guides/references/trade-offs" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+          Trade-offs
+        </a></div></li><li><div><a href="/guides/references/troubleshooting" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+          Troubleshooting
+        </a></div></li><li><div><a href="/guides/references/changelog" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+          Changelog
+        </a></div></li><li><div><a href="/guides/references/migration-guide" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+          Migration Guide
+        </a></div></li><li><div><a href="/guides/references/roadmap" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+          Roadmap
+        </a></div></li><li><div><a href="/guides/references/experiments" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+          Experiments
+        </a></div></li></ul></div></div></div></nav></div> <main class="main-content"><aside role="navigation" class="app-sidebar hide-scroll hidden lg:flex lg:w-sidebar lg:col-span-3 xl:col-span-2 top-0 left-0 bottom-0 flex-col border-r border-b border-gray-200 mt-16 bg-lightGray overflow-y-auto lg:z-10"><div class="mt-5 pt-16 fixed top-0 bottom-0 left-0 right-0 overflow-y-auto lg:w-sidebar flex-grow flex flex-col overflow-y-auto hide-scroll"><div data-test="overview" class="space-y-1 px-4 pb-4" data-v-75d0940e><button class="group w-full flex items-center text-left px-2 pl-4 pr-1 text-lg font-bold bg-lightGray text-gray-600 hover:text-gray-900 hover:bg-gray-50 focus:outline-none" data-v-75d0940e>
+    Overview
+     <svg viewBox="0 0 20 20" aria-hidden="true" class="ml-auto h-5 w-5 transform group-hover:text-gray-400 transition-colors ease-in-out duration-150 text-gray-300" data-v-75d0940e><path d="M6 6L14 10L6 14V6Z" fill="currentColor" data-v-75d0940e></path></svg></button> <ul data-test="Overview-children" class="space-y-1 m-0 hidden" data-v-75d0940e><div data-v-75d0940e><li data-v-75d0940e><a href="/guides/overview/why-cypress" class="rounded-md group w-full flex items-center pl-4 pr-2 py-1 text-md font-medium hover:text-green transition-colors hover:bg-gray-50 text-gray-600" data-v-75d0940e>
+          Why Cypress?
+        </a></li></div><div data-v-75d0940e><li data-v-75d0940e><a href="/guides/overview/key-differences" class="rounded-md group w-full flex items-center pl-4 pr-2 py-1 text-md font-medium hover:text-green transition-colors hover:bg-gray-50 text-gray-600" data-v-75d0940e>
+          Key Differences
+        </a></li></div></ul></div><div data-test="getting-started" class="space-y-1 px-4 pb-4" data-v-75d0940e><button class="group w-full flex items-center text-left px-2 pl-4 pr-1 text-lg font-bold bg-lightGray text-gray-600 hover:text-gray-900 hover:bg-gray-50 focus:outline-none" data-v-75d0940e>
+    Getting Started
+     <svg viewBox="0 0 20 20" aria-hidden="true" class="ml-auto h-5 w-5 transform group-hover:text-gray-400 transition-colors ease-in-out duration-150 text-gray-400 rotate-90" data-v-75d0940e><path d="M6 6L14 10L6 14V6Z" fill="currentColor" data-v-75d0940e></path></svg></button> <ul data-test="Getting Started-children" class="space-y-1 m-0" data-v-75d0940e><div data-v-75d0940e><li data-v-75d0940e><a href="/guides/getting-started/installing-cypress" class="rounded-md group w-full flex items-center pl-4 pr-2 py-1 text-md font-medium hover:text-green transition-colors hover:bg-gray-50 text-gray-600" data-v-75d0940e>
+          Installing Cypress
+        </a></li></div><div data-v-75d0940e><li data-v-75d0940e><a href="/guides/getting-started/writing-your-first-test" aria-current="page" class="rounded-md group w-full flex items-center pl-4 pr-2 py-1 text-md font-medium hover:text-green transition-colors hover:bg-gray-50 nuxt-link-exact-active nuxt-link-active active-sidebar-link" data-v-75d0940e>
+          Writing Your First Test
+        </a></li></div><div data-v-75d0940e><li data-v-75d0940e><a href="/guides/getting-started/testing-your-app" class="rounded-md group w-full flex items-center pl-4 pr-2 py-1 text-md font-medium hover:text-green transition-colors hover:bg-gray-50 text-gray-600" data-v-75d0940e>
+          Testing Your App
+        </a></li></div></ul></div><div data-test="core-concepts" class="space-y-1 px-4 pb-4" data-v-75d0940e><button class="group w-full flex items-center text-left px-2 pl-4 pr-1 text-lg font-bold bg-lightGray text-gray-600 hover:text-gray-900 hover:bg-gray-50 focus:outline-none" data-v-75d0940e>
+    Core Concepts
+     <svg viewBox="0 0 20 20" aria-hidden="true" class="ml-auto h-5 w-5 transform group-hover:text-gray-400 transition-colors ease-in-out duration-150 text-gray-300" data-v-75d0940e><path d="M6 6L14 10L6 14V6Z" fill="currentColor" data-v-75d0940e></path></svg></button> <ul data-test="Core Concepts-children" class="space-y-1 m-0 hidden" data-v-75d0940e><div data-v-75d0940e><li data-v-75d0940e><a href="/guides/core-concepts/introduction-to-cypress" class="rounded-md group w-full flex items-center pl-4 pr-2 py-1 text-md font-medium hover:text-green transition-colors hover:bg-gray-50 text-gray-600" data-v-75d0940e>
+          Introduction to Cypress
+        </a></li></div><div data-v-75d0940e><li data-v-75d0940e><a href="/guides/core-concepts/writing-and-organizing-tests" class="rounded-md group w-full flex items-center pl-4 pr-2 py-1 text-md font-medium hover:text-green transition-colors hover:bg-gray-50 text-gray-600" data-v-75d0940e>
+          Writing and Organizing Tests
+        </a></li></div><div data-v-75d0940e><li data-v-75d0940e><a href="/guides/core-concepts/retry-ability" class="rounded-md group w-full flex items-center pl-4 pr-2 py-1 text-md font-medium hover:text-green transition-colors hover:bg-gray-50 text-gray-600" data-v-75d0940e>
+          Retry-ability
+        </a></li></div><div data-v-75d0940e><li data-v-75d0940e><a href="/guides/core-concepts/interacting-with-elements" class="rounded-md group w-full flex items-center pl-4 pr-2 py-1 text-md font-medium hover:text-green transition-colors hover:bg-gray-50 text-gray-600" data-v-75d0940e>
+          Interacting with Elements
+        </a></li></div><div data-v-75d0940e><li data-v-75d0940e><a href="/guides/core-concepts/variables-and-aliases" class="rounded-md group w-full flex items-center pl-4 pr-2 py-1 text-md font-medium hover:text-green transition-colors hover:bg-gray-50 text-gray-600" data-v-75d0940e>
+          Variables and Aliases
+        </a></li></div><div data-v-75d0940e><li data-v-75d0940e><a href="/guides/core-concepts/conditional-testing" class="rounded-md group w-full flex items-center pl-4 pr-2 py-1 text-md font-medium hover:text-green transition-colors hover:bg-gray-50 text-gray-600" data-v-75d0940e>
+          Conditional Testing
+        </a></li></div><div data-v-75d0940e><li data-v-75d0940e><a href="/guides/core-concepts/test-runner" class="rounded-md group w-full flex items-center pl-4 pr-2 py-1 text-md font-medium hover:text-green transition-colors hover:bg-gray-50 text-gray-600" data-v-75d0940e>
+          The Test Runner
+        </a></li></div><div data-v-75d0940e><li data-v-75d0940e><a href="/guides/core-concepts/cypress-studio" class="rounded-md group w-full flex items-center pl-4 pr-2 py-1 text-md font-medium hover:text-green transition-colors hover:bg-gray-50 text-gray-600" data-v-75d0940e>
+          Cypress Studio
+        </a></li></div></ul></div><div data-test="dashboard" class="space-y-1 px-4 pb-4" data-v-75d0940e><button class="group w-full flex items-center text-left px-2 pl-4 pr-1 text-lg font-bold bg-lightGray text-gray-600 hover:text-gray-900 hover:bg-gray-50 focus:outline-none" data-v-75d0940e>
+    Dashboard
+     <svg viewBox="0 0 20 20" aria-hidden="true" class="ml-auto h-5 w-5 transform group-hover:text-gray-400 transition-colors ease-in-out duration-150 text-gray-300" data-v-75d0940e><path d="M6 6L14 10L6 14V6Z" fill="currentColor" data-v-75d0940e></path></svg></button> <ul data-test="Dashboard-children" class="space-y-1 m-0 hidden" data-v-75d0940e><div data-v-75d0940e><li data-v-75d0940e><a href="/guides/dashboard/introduction" class="rounded-md group w-full flex items-center pl-4 pr-2 py-1 text-md font-medium hover:text-green transition-colors hover:bg-gray-50 text-gray-600" data-v-75d0940e>
+          Introduction
+        </a></li></div><div data-v-75d0940e><li data-v-75d0940e><a href="/guides/dashboard/projects" class="rounded-md group w-full flex items-center pl-4 pr-2 py-1 text-md font-medium hover:text-green transition-colors hover:bg-gray-50 text-gray-600" data-v-75d0940e>
+          Projects
+        </a></li></div><div data-v-75d0940e><li data-v-75d0940e><a href="/guides/dashboard/runs" class="rounded-md group w-full flex items-center pl-4 pr-2 py-1 text-md font-medium hover:text-green transition-colors hover:bg-gray-50 text-gray-600" data-v-75d0940e>
+          Runs
+        </a></li></div><div data-v-75d0940e><li data-v-75d0940e><a href="/guides/dashboard/organizations" class="rounded-md group w-full flex items-center pl-4 pr-2 py-1 text-md font-medium hover:text-green transition-colors hover:bg-gray-50 text-gray-600" data-v-75d0940e>
+          Organizations
+        </a></li></div><div data-v-75d0940e><li data-v-75d0940e><a href="/guides/dashboard/users" class="rounded-md group w-full flex items-center pl-4 pr-2 py-1 text-md font-medium hover:text-green transition-colors hover:bg-gray-50 text-gray-600" data-v-75d0940e>
+          Users
+        </a></li></div><div data-v-75d0940e><li data-v-75d0940e><a href="/guides/dashboard/bitbucket-integration" class="rounded-md group w-full flex items-center pl-4 pr-2 py-1 text-md font-medium hover:text-green transition-colors hover:bg-gray-50 text-gray-600" data-v-75d0940e>
+          Bitbucket Integration
+        </a></li></div><div data-v-75d0940e><li data-v-75d0940e><a href="/guides/dashboard/github-integration" class="rounded-md group w-full flex items-center pl-4 pr-2 py-1 text-md font-medium hover:text-green transition-colors hover:bg-gray-50 text-gray-600" data-v-75d0940e>
+          GitHub Integration
+        </a></li></div><div data-v-75d0940e><li data-v-75d0940e><a href="/guides/dashboard/gitlab-integration" class="rounded-md group w-full flex items-center pl-4 pr-2 py-1 text-md font-medium hover:text-green transition-colors hover:bg-gray-50 text-gray-600" data-v-75d0940e>
+          GitLab Integration
+        </a></li></div><div data-v-75d0940e><li data-v-75d0940e><a href="/guides/dashboard/jira-integration" class="rounded-md group w-full flex items-center pl-4 pr-2 py-1 text-md font-medium hover:text-green transition-colors hover:bg-gray-50 text-gray-600" data-v-75d0940e>
+          Jira Integration
+        </a></li></div><div data-v-75d0940e><li data-v-75d0940e><a href="/guides/dashboard/slack-integration" class="rounded-md group w-full flex items-center pl-4 pr-2 py-1 text-md font-medium hover:text-green transition-colors hover:bg-gray-50 text-gray-600" data-v-75d0940e>
+          Slack Integration
+        </a></li></div><div data-v-75d0940e><li data-v-75d0940e><a href="/guides/dashboard/analytics" class="rounded-md group w-full flex items-center pl-4 pr-2 py-1 text-md font-medium hover:text-green transition-colors hover:bg-gray-50 text-gray-600" data-v-75d0940e>
+          Analytics
+        </a></li></div><div data-v-75d0940e><li data-v-75d0940e><a href="/guides/dashboard/flaky-test-management" class="rounded-md group w-full flex items-center pl-4 pr-2 py-1 text-md font-medium hover:text-green transition-colors hover:bg-gray-50 text-gray-600" data-v-75d0940e>
+          Flaky Test Management
+        </a></li></div><div data-v-75d0940e><li data-v-75d0940e><a href="/guides/dashboard/smart-orchestration" class="rounded-md group w-full flex items-center pl-4 pr-2 py-1 text-md font-medium hover:text-green transition-colors hover:bg-gray-50 text-gray-600" data-v-75d0940e>
+          Smart Orchestration
+        </a></li></div></ul></div><div data-test="guides" class="space-y-1 px-4 pb-4" data-v-75d0940e><button class="group w-full flex items-center text-left px-2 pl-4 pr-1 text-lg font-bold bg-lightGray text-gray-600 hover:text-gray-900 hover:bg-gray-50 focus:outline-none" data-v-75d0940e>
+    Guides
+     <svg viewBox="0 0 20 20" aria-hidden="true" class="ml-auto h-5 w-5 transform group-hover:text-gray-400 transition-colors ease-in-out duration-150 text-gray-300" data-v-75d0940e><path d="M6 6L14 10L6 14V6Z" fill="currentColor" data-v-75d0940e></path></svg></button> <ul data-test="Guides-children" class="space-y-1 m-0 hidden" data-v-75d0940e><div data-v-75d0940e><li data-v-75d0940e><a href="/guides/guides/command-line" class="rounded-md group w-full flex items-center pl-4 pr-2 py-1 text-md font-medium hover:text-green transition-colors hover:bg-gray-50 text-gray-600" data-v-75d0940e>
+          Command Line
+        </a></li></div><div data-v-75d0940e><li data-v-75d0940e><a href="/guides/guides/module-api" class="rounded-md group w-full flex items-center pl-4 pr-2 py-1 text-md font-medium hover:text-green transition-colors hover:bg-gray-50 text-gray-600" data-v-75d0940e>
+          Module API
+        </a></li></div><div data-v-75d0940e><li data-v-75d0940e><a href="/guides/guides/debugging" class="rounded-md group w-full flex items-center pl-4 pr-2 py-1 text-md font-medium hover:text-green transition-colors hover:bg-gray-50 text-gray-600" data-v-75d0940e>
+          Debugging
+        </a></li></div><div data-v-75d0940e><li data-v-75d0940e><a href="/guides/guides/network-requests" class="rounded-md group w-full flex items-center pl-4 pr-2 py-1 text-md font-medium hover:text-green transition-colors hover:bg-gray-50 text-gray-600" data-v-75d0940e>
+          Network Requests
+        </a></li></div><div data-v-75d0940e><li data-v-75d0940e><a href="/guides/guides/test-retries" class="rounded-md group w-full flex items-center pl-4 pr-2 py-1 text-md font-medium hover:text-green transition-colors hover:bg-gray-50 text-gray-600" data-v-75d0940e>
+          Test Retries
+        </a></li></div><div data-v-75d0940e><li data-v-75d0940e><a href="/guides/guides/parallelization" class="rounded-md group w-full flex items-center pl-4 pr-2 py-1 text-md font-medium hover:text-green transition-colors hover:bg-gray-50 text-gray-600" data-v-75d0940e>
+          Parallelization
+        </a></li></div><div data-v-75d0940e><li data-v-75d0940e><a href="/guides/guides/environment-variables" class="rounded-md group w-full flex items-center pl-4 pr-2 py-1 text-md font-medium hover:text-green transition-colors hover:bg-gray-50 text-gray-600" data-v-75d0940e>
+          Environment Variables
+        </a></li></div><div data-v-75d0940e><li data-v-75d0940e><a href="/guides/guides/stubs-spies-and-clocks" class="rounded-md group w-full flex items-center pl-4 pr-2 py-1 text-md font-medium hover:text-green transition-colors hover:bg-gray-50 text-gray-600" data-v-75d0940e>
+          Stubs, Spies, and Clocks
+        </a></li></div><div data-v-75d0940e><li data-v-75d0940e><a href="/guides/guides/screenshots-and-videos" class="rounded-md group w-full flex items-center pl-4 pr-2 py-1 text-md font-medium hover:text-green transition-colors hover:bg-gray-50 text-gray-600" data-v-75d0940e>
+          Screenshots and Videos
+        </a></li></div><div data-v-75d0940e><li data-v-75d0940e><a href="/guides/guides/launching-browsers" class="rounded-md group w-full flex items-center pl-4 pr-2 py-1 text-md font-medium hover:text-green transition-colors hover:bg-gray-50 text-gray-600" data-v-75d0940e>
+          Launching Browsers
+        </a></li></div><div data-v-75d0940e><li data-v-75d0940e><a href="/guides/guides/cross-browser-testing" class="rounded-md group w-full flex items-center pl-4 pr-2 py-1 text-md font-medium hover:text-green transition-colors hover:bg-gray-50 text-gray-600" data-v-75d0940e>
+          Cross Browser Testing
+        </a></li></div><div data-v-75d0940e><li data-v-75d0940e><a href="/guides/guides/web-security" class="rounded-md group w-full flex items-center pl-4 pr-2 py-1 text-md font-medium hover:text-green transition-colors hover:bg-gray-50 text-gray-600" data-v-75d0940e>
+          Web Security
+        </a></li></div></ul></div><div data-test="testing-strategies" class="space-y-1 px-4 pb-4" data-v-75d0940e><button class="group w-full flex items-center text-left px-2 pl-4 pr-1 text-lg font-bold bg-lightGray text-gray-600 hover:text-gray-900 hover:bg-gray-50 focus:outline-none" data-v-75d0940e>
+    Testing Strategies
+     <svg viewBox="0 0 20 20" aria-hidden="true" class="ml-auto h-5 w-5 transform group-hover:text-gray-400 transition-colors ease-in-out duration-150 text-gray-300" data-v-75d0940e><path d="M6 6L14 10L6 14V6Z" fill="currentColor" data-v-75d0940e></path></svg></button> <ul data-test="Testing Strategies-children" class="space-y-1 m-0 hidden" data-v-75d0940e><div data-v-75d0940e><li data-v-75d0940e><a href="/guides/testing-strategies/auth0-authentication" class="rounded-md group w-full flex items-center pl-4 pr-2 py-1 text-md font-medium hover:text-green transition-colors hover:bg-gray-50 text-gray-600" data-v-75d0940e>
+          Auth0 Authentication
+        </a></li></div><div data-v-75d0940e><li data-v-75d0940e><a href="/guides/testing-strategies/amazon-cognito-authentication" class="rounded-md group w-full flex items-center pl-4 pr-2 py-1 text-md font-medium hover:text-green transition-colors hover:bg-gray-50 text-gray-600" data-v-75d0940e>
+          Amazon Cognito Authentication
+        </a></li></div><div data-v-75d0940e><li data-v-75d0940e><a href="/guides/testing-strategies/okta-authentication" class="rounded-md group w-full flex items-center pl-4 pr-2 py-1 text-md font-medium hover:text-green transition-colors hover:bg-gray-50 text-gray-600" data-v-75d0940e>
+          Okta Authentication
+        </a></li></div><div data-v-75d0940e><li data-v-75d0940e><a href="/guides/testing-strategies/google-authentication" class="rounded-md group w-full flex items-center pl-4 pr-2 py-1 text-md font-medium hover:text-green transition-colors hover:bg-gray-50 text-gray-600" data-v-75d0940e>
+          Google Authentication
+        </a></li></div><div data-v-75d0940e><li data-v-75d0940e><a href="/guides/testing-strategies/working-with-graphql" class="rounded-md group w-full flex items-center pl-4 pr-2 py-1 text-md font-medium hover:text-green transition-colors hover:bg-gray-50 text-gray-600" data-v-75d0940e>
+          Working with GraphQL
+        </a></li></div></ul></div><div data-test="continuous-integration" class="space-y-1 px-4 pb-4" data-v-75d0940e><button class="group w-full flex items-center text-left px-2 pl-4 pr-1 text-lg font-bold bg-lightGray text-gray-600 hover:text-gray-900 hover:bg-gray-50 focus:outline-none" data-v-75d0940e>
+    Continuous Integration
+     <svg viewBox="0 0 20 20" aria-hidden="true" class="ml-auto h-5 w-5 transform group-hover:text-gray-400 transition-colors ease-in-out duration-150 text-gray-300" data-v-75d0940e><path d="M6 6L14 10L6 14V6Z" fill="currentColor" data-v-75d0940e></path></svg></button> <ul data-test="Continuous Integration-children" class="space-y-1 m-0 hidden" data-v-75d0940e><div data-v-75d0940e><li data-v-75d0940e><a href="/guides/continuous-integration/introduction" class="rounded-md group w-full flex items-center pl-4 pr-2 py-1 text-md font-medium hover:text-green transition-colors hover:bg-gray-50 text-gray-600" data-v-75d0940e>
+          Introduction
+        </a></li></div><div data-v-75d0940e><li data-v-75d0940e><a href="/guides/continuous-integration/ci-provider-examples" class="rounded-md group w-full flex items-center pl-4 pr-2 py-1 text-md font-medium hover:text-green transition-colors hover:bg-gray-50 text-gray-600" data-v-75d0940e>
+          CI Provider Examples
+        </a></li></div><div data-v-75d0940e><li data-v-75d0940e><a href="/guides/continuous-integration/circleci" class="rounded-md group w-full flex items-center pl-4 pr-2 py-1 text-md font-medium hover:text-green transition-colors hover:bg-gray-50 text-gray-600" data-v-75d0940e>
+          CircleCI
+        </a></li></div><div data-v-75d0940e><li data-v-75d0940e><a href="/guides/continuous-integration/github-actions" class="rounded-md group w-full flex items-center pl-4 pr-2 py-1 text-md font-medium hover:text-green transition-colors hover:bg-gray-50 text-gray-600" data-v-75d0940e>
+          GitHub Actions
+        </a></li></div><div data-v-75d0940e><li data-v-75d0940e><a href="/guides/continuous-integration/gitlab-ci" class="rounded-md group w-full flex items-center pl-4 pr-2 py-1 text-md font-medium hover:text-green transition-colors hover:bg-gray-50 text-gray-600" data-v-75d0940e>
+          GitLab CI
+        </a></li></div><div data-v-75d0940e><li data-v-75d0940e><a href="/guides/continuous-integration/bitbucket-pipelines" class="rounded-md group w-full flex items-center pl-4 pr-2 py-1 text-md font-medium hover:text-green transition-colors hover:bg-gray-50 text-gray-600" data-v-75d0940e>
+          Bitbucket Pipelines
+        </a></li></div><div data-v-75d0940e><li data-v-75d0940e><a href="/guides/continuous-integration/aws-codebuild" class="rounded-md group w-full flex items-center pl-4 pr-2 py-1 text-md font-medium hover:text-green transition-colors hover:bg-gray-50 text-gray-600" data-v-75d0940e>
+          AWS CodeBuild
+        </a></li></div></ul></div><div data-test="component-testing" class="space-y-1 px-4 pb-4" data-v-75d0940e><button class="group w-full flex items-center text-left px-2 pl-4 pr-1 text-lg font-bold bg-lightGray text-gray-600 hover:text-gray-900 hover:bg-gray-50 focus:outline-none" data-v-75d0940e>
+    Component Testing
+     <svg viewBox="0 0 20 20" aria-hidden="true" class="ml-auto h-5 w-5 transform group-hover:text-gray-400 transition-colors ease-in-out duration-150 text-gray-300" data-v-75d0940e><path d="M6 6L14 10L6 14V6Z" fill="currentColor" data-v-75d0940e></path></svg></button> <ul data-test="Component Testing-children" class="space-y-1 m-0 hidden" data-v-75d0940e><div data-v-75d0940e><li data-v-75d0940e><a href="/guides/component-testing/introduction" class="rounded-md group w-full flex items-center pl-4 pr-2 py-1 text-md font-medium hover:text-green transition-colors hover:bg-gray-50 text-gray-600" data-v-75d0940e>
+          Introduction
+        </a></li></div><div data-v-75d0940e><li data-v-75d0940e><a href="/guides/component-testing/framework-configuration" class="rounded-md group w-full flex items-center pl-4 pr-2 py-1 text-md font-medium hover:text-green transition-colors hover:bg-gray-50 text-gray-600" data-v-75d0940e>
+          Framework Configuration
+        </a></li></div></ul></div><div data-test="migrating-to-cypress" class="space-y-1 px-4 pb-4" data-v-75d0940e><button class="group w-full flex items-center text-left px-2 pl-4 pr-1 text-lg font-bold bg-lightGray text-gray-600 hover:text-gray-900 hover:bg-gray-50 focus:outline-none" data-v-75d0940e>
+    Migrating to Cypress
+     <svg viewBox="0 0 20 20" aria-hidden="true" class="ml-auto h-5 w-5 transform group-hover:text-gray-400 transition-colors ease-in-out duration-150 text-gray-300" data-v-75d0940e><path d="M6 6L14 10L6 14V6Z" fill="currentColor" data-v-75d0940e></path></svg></button> <ul data-test="Migrating to Cypress-children" class="space-y-1 m-0 hidden" data-v-75d0940e><div data-v-75d0940e><li data-v-75d0940e><a href="/guides/migrating-to-cypress/protractor" class="rounded-md group w-full flex items-center pl-4 pr-2 py-1 text-md font-medium hover:text-green transition-colors hover:bg-gray-50 text-gray-600" data-v-75d0940e>
+          Protractor
+        </a></li></div></ul></div><div data-test="tooling" class="space-y-1 px-4 pb-4" data-v-75d0940e><button class="group w-full flex items-center text-left px-2 pl-4 pr-1 text-lg font-bold bg-lightGray text-gray-600 hover:text-gray-900 hover:bg-gray-50 focus:outline-none" data-v-75d0940e>
+    Tooling
+     <svg viewBox="0 0 20 20" aria-hidden="true" class="ml-auto h-5 w-5 transform group-hover:text-gray-400 transition-colors ease-in-out duration-150 text-gray-300" data-v-75d0940e><path d="M6 6L14 10L6 14V6Z" fill="currentColor" data-v-75d0940e></path></svg></button> <ul data-test="Tooling-children" class="space-y-1 m-0 hidden" data-v-75d0940e><div data-v-75d0940e><li data-v-75d0940e><a href="/guides/tooling/IDE-integration" class="rounded-md group w-full flex items-center pl-4 pr-2 py-1 text-md font-medium hover:text-green transition-colors hover:bg-gray-50 text-gray-600" data-v-75d0940e>
+          IDE Integration
+        </a></li></div><div data-v-75d0940e><li data-v-75d0940e><a href="/guides/tooling/plugins-guide" class="rounded-md group w-full flex items-center pl-4 pr-2 py-1 text-md font-medium hover:text-green transition-colors hover:bg-gray-50 text-gray-600" data-v-75d0940e>
+          Plugins
+        </a></li></div><div data-v-75d0940e><li data-v-75d0940e><a href="/guides/tooling/reporters" class="rounded-md group w-full flex items-center pl-4 pr-2 py-1 text-md font-medium hover:text-green transition-colors hover:bg-gray-50 text-gray-600" data-v-75d0940e>
+          Reporters
+        </a></li></div><div data-v-75d0940e><li data-v-75d0940e><a href="/guides/tooling/typescript-support" class="rounded-md group w-full flex items-center pl-4 pr-2 py-1 text-md font-medium hover:text-green transition-colors hover:bg-gray-50 text-gray-600" data-v-75d0940e>
+          TypeScript
+        </a></li></div><div data-v-75d0940e><li data-v-75d0940e><a href="/guides/tooling/visual-testing" class="rounded-md group w-full flex items-center pl-4 pr-2 py-1 text-md font-medium hover:text-green transition-colors hover:bg-gray-50 text-gray-600" data-v-75d0940e>
+          Visual Testing
+        </a></li></div><div data-v-75d0940e><li data-v-75d0940e><a href="/guides/tooling/code-coverage" class="rounded-md group w-full flex items-center pl-4 pr-2 py-1 text-md font-medium hover:text-green transition-colors hover:bg-gray-50 text-gray-600" data-v-75d0940e>
+          Code Coverage
+        </a></li></div></ul></div><div data-test="references" class="space-y-1 px-4 pb-4" data-v-75d0940e><button class="group w-full flex items-center text-left px-2 pl-4 pr-1 text-lg font-bold bg-lightGray text-gray-600 hover:text-gray-900 hover:bg-gray-50 focus:outline-none" data-v-75d0940e>
+    References
+     <svg viewBox="0 0 20 20" aria-hidden="true" class="ml-auto h-5 w-5 transform group-hover:text-gray-400 transition-colors ease-in-out duration-150 text-gray-300" data-v-75d0940e><path d="M6 6L14 10L6 14V6Z" fill="currentColor" data-v-75d0940e></path></svg></button> <ul data-test="References-children" class="space-y-1 m-0 hidden" data-v-75d0940e><div data-v-75d0940e><li data-v-75d0940e><a href="/guides/references/assertions" class="rounded-md group w-full flex items-center pl-4 pr-2 py-1 text-md font-medium hover:text-green transition-colors hover:bg-gray-50 text-gray-600" data-v-75d0940e>
+          Assertions
+        </a></li></div><div data-v-75d0940e><li data-v-75d0940e><a href="/guides/references/configuration" class="rounded-md group w-full flex items-center pl-4 pr-2 py-1 text-md font-medium hover:text-green transition-colors hover:bg-gray-50 text-gray-600" data-v-75d0940e>
+          Configuration
+        </a></li></div><div data-v-75d0940e><li data-v-75d0940e><a href="/guides/references/client-certificates" class="rounded-md group w-full flex items-center pl-4 pr-2 py-1 text-md font-medium hover:text-green transition-colors hover:bg-gray-50 text-gray-600" data-v-75d0940e>
+          Client Certificates
+        </a></li></div><div data-v-75d0940e><li data-v-75d0940e><a href="/guides/references/proxy-configuration" class="rounded-md group w-full flex items-center pl-4 pr-2 py-1 text-md font-medium hover:text-green transition-colors hover:bg-gray-50 text-gray-600" data-v-75d0940e>
+          Proxy Configuration
+        </a></li></div><div data-v-75d0940e><li data-v-75d0940e><a href="/guides/references/best-practices" class="rounded-md group w-full flex items-center pl-4 pr-2 py-1 text-md font-medium hover:text-green transition-colors hover:bg-gray-50 text-gray-600" data-v-75d0940e>
+          Best Practices
+        </a></li></div><div data-v-75d0940e><li data-v-75d0940e><a href="/guides/references/error-messages" class="rounded-md group w-full flex items-center pl-4 pr-2 py-1 text-md font-medium hover:text-green transition-colors hover:bg-gray-50 text-gray-600" data-v-75d0940e>
+          Error Messages
+        </a></li></div><div data-v-75d0940e><li data-v-75d0940e><a href="/guides/references/bundled-tools" class="rounded-md group w-full flex items-center pl-4 pr-2 py-1 text-md font-medium hover:text-green transition-colors hover:bg-gray-50 text-gray-600" data-v-75d0940e>
+          Bundled Tools
+        </a></li></div><div data-v-75d0940e><li data-v-75d0940e><a href="/guides/references/trade-offs" class="rounded-md group w-full flex items-center pl-4 pr-2 py-1 text-md font-medium hover:text-green transition-colors hover:bg-gray-50 text-gray-600" data-v-75d0940e>
+          Trade-offs
+        </a></li></div><div data-v-75d0940e><li data-v-75d0940e><a href="/guides/references/troubleshooting" class="rounded-md group w-full flex items-center pl-4 pr-2 py-1 text-md font-medium hover:text-green transition-colors hover:bg-gray-50 text-gray-600" data-v-75d0940e>
+          Troubleshooting
+        </a></li></div><div data-v-75d0940e><li data-v-75d0940e><a href="/guides/references/changelog" class="rounded-md group w-full flex items-center pl-4 pr-2 py-1 text-md font-medium hover:text-green transition-colors hover:bg-gray-50 text-gray-600" data-v-75d0940e>
+          Changelog
+        </a></li></div><div data-v-75d0940e><li data-v-75d0940e><a href="/guides/references/migration-guide" class="rounded-md group w-full flex items-center pl-4 pr-2 py-1 text-md font-medium hover:text-green transition-colors hover:bg-gray-50 text-gray-600" data-v-75d0940e>
+          Migration Guide
+        </a></li></div><div data-v-75d0940e><li data-v-75d0940e><a href="/guides/references/roadmap" class="rounded-md group w-full flex items-center pl-4 pr-2 py-1 text-md font-medium hover:text-green transition-colors hover:bg-gray-50 text-gray-600" data-v-75d0940e>
+          Roadmap
+        </a></li></div><div data-v-75d0940e><li data-v-75d0940e><a href="/guides/references/experiments" class="rounded-md group w-full flex items-center pl-4 pr-2 py-1 text-md font-medium hover:text-green transition-colors hover:bg-gray-50 text-gray-600" data-v-75d0940e>
+          Experiments
+        </a></li></div></ul></div></div></aside> <div class="main-content-article-wrapper"><article class="main-content-article hide-scroll"><h1 class="main-content-title">
+          Writing Your First Test
+        </h1> <div class="nuxt-content"><div role="alert" class="alert_LKj6V info_2I0eB">
+<h2 id="What-you-ll-learn"><a href="#What-you-ll-learn" aria-hidden="true" tabindex="-1"><span class="icon icon-link"></span></a><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="graduation-cap" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" class="svg-inline--fa fa-graduation-cap" style="color:inherit"><path fill="currentColor" d="M622.34 153.2L343.4 67.5c-15.2-4.67-31.6-4.67-46.79 0L17.66 153.2c-23.54 7.23-23.54 38.36 0 45.59l48.63 14.94c-10.67 13.19-17.23 29.28-17.88 46.9C38.78 266.15 32 276.11 32 288c0 10.78 5.68 19.85 13.86 25.65L20.33 428.53C18.11 438.52 25.71 448 35.94 448h56.11c10.24 0 17.84-9.48 15.62-19.47L82.14 313.65C90.32 307.85 96 298.78 96 288c0-11.57-6.47-21.25-15.66-26.87.76-15.02 8.44-28.3 20.69-36.72L296.6 284.5c9.06 2.78 26.44 6.25 46.79 0l278.95-85.7c23.55-7.24 23.55-38.36 0-45.6zM352.79 315.09c-28.53 8.76-52.84 3.92-65.59 0l-145.02-44.55L128 384c0 35.35 85.96 64 192 64s192-28.65 192-64l-14.18-113.47-145.03 44.56z"></path></svg> What you'll learn</h2>
+<ul>
+<li>How to start testing a new project in Cypress.</li>
+<li>What passing and failing tests look like.</li>
+<li>Testing web navigation, DOM querying, and writing assertions.</li>
+</ul>
+</div>
+<div class="embedContainer_+j-Zf"><iframe src="https://player.vimeo.com/video/237115455" title="video" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen></iframe></div>
+<h2 id="Add-a-test-file"><a href="#Add-a-test-file" aria-hidden="true" tabindex="-1"><span class="icon icon-link"></span></a>Add a test file</h2>
+<p>Assuming you've successfully
+<a href="/guides/getting-started/installing-cypress#Installing">installed the Test Runner</a>
+and
+<a href="/guides/getting-started/installing-cypress#Opening-Cypress">opened the Cypress app</a>,
+now it's time to write our first test. We're going to:</p>
+<ol>
+<li>Create a <code>sample_spec.js</code> file.</li>
+<li>Watch Cypress update our list of specs.</li>
+<li>Launch the Cypress Test Runner.</li>
+</ol>
+<p>Let's create a new file in the <code>cypress/integration</code> folder that was created for
+us:</p>
+<div class="nuxt-content-highlight"><pre class="line-numbers language-shell"><code><span class="token function">touch</span> <span class="token punctuation">{</span>your_project<span class="token punctuation">}</span>/cypress/integration/sample_spec.js
+</code></pre></div>
+<p>Once we've created that file, we should see the Cypress Test Runner immediately
+display it in the list of Integration Tests. Cypress monitors your spec files
+for any changes and automatically displays any changes.</p>
+<p>Even though we haven't written any tests yet - that's okay - let's click on
+<code>sample_spec.js</code> and watch Cypress launch your browser.</p>
+<div role="alert" class="alert_LKj6V info_2I0eB">
+<p>Cypress opens the test in a browser installed on your system. You can read more
+about how we do this in <a href="/guides/guides/launching-browsers">Launching Browsers</a>.</p>
+</div>
+<video controls class="docsVideo_JyhYd"><source src="/_nuxt/videos/empty-file-30fps.a4d4b40.mp4"></video>
+<p>We are now officially in the
+<a href="/guides/core-concepts/test-runner">Cypress Test Runner</a>. This is where we will
+spend the majority of your time testing.</p>
+<div role="alert" class="alert_LKj6V warning_iUVdm">
+<p>Notice Cypress displays the message that it couldn't find any tests. This is
+normal - we haven't written any tests! Sometimes you'll also see this message if
+there was an error parsing your test file. You can always open your <strong>Dev
+Tools</strong> to inspect the Console for any syntax or parsing errors that prevented
+Cypress from reading your tests.</p>
+</div>
+<h2 id="Write-your-first-test"><a href="#Write-your-first-test" aria-hidden="true" tabindex="-1"><span class="icon icon-link"></span></a>Write your first test</h2>
+<p>Now it's time to write our first test. We're going to:</p>
+<ol>
+<li>Write our first passing test.</li>
+<li>Write our first failing test.</li>
+<li>Watch Cypress reload in real time.</li>
+</ol>
+<p>As we continue to save our new test file we'll see the browser auto reloading in
+real time.</p>
+<p>Open up your favorite IDE and add the code below to our <code>sample_spec.js</code> test
+file.</p>
+<div class="nuxt-content-highlight"><pre class="line-numbers language-js"><code><span class="token function">describe</span><span class="token punctuation">(</span><span class="token string">'My First Test'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
+  <span class="token function">it</span><span class="token punctuation">(</span><span class="token string">'Does not do much!'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
+    <span class="token function">expect</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token property-access">to</span><span class="token punctuation">.</span><span class="token method function property-access">equal</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre></div>
+<p>Once you save this file you should see the browser reload.</p>
+<p>Although it doesn't do anything useful, this is our first passing test! ✅</p>
+<p>Over in the <a href="/guides/core-concepts/test-runner#Command-Log">Command Log</a> you'll
+see Cypress display the suite, the test and your first assertion (which should
+be passing in green).</p>
+<img src="/_nuxt/img/first-test.55ba0d8.png" alt="My first test shown passing in the Test Runner" class="docsImage_1KPA0">
+<div role="alert" class="alert_LKj6V info_2I0eB">
+<p>Notice Cypress displays a message about this being the default page
+<a href="/guides/core-concepts/test-runner#Application-Under-Test">on the righthand side</a>.
+Cypress assumes you'll want to go out and <a href="/api/commands/visit">visit</a> a URL on
+the internet - but it can also work just fine without that.</p>
+</div>
+<p>Now let's write our first failing test.</p>
+<div class="nuxt-content-highlight"><pre class="line-numbers language-js"><code><span class="token function">describe</span><span class="token punctuation">(</span><span class="token string">'My First Test'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
+  <span class="token function">it</span><span class="token punctuation">(</span><span class="token string">'Does not do much!'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
+    <span class="token function">expect</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token property-access">to</span><span class="token punctuation">.</span><span class="token method function property-access">equal</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre></div>
+<p>Once you save again, you'll see Cypress display the failing test in red since
+<code>true</code> does not equal <code>false</code>.</p>
+<p>Cypress also displays the stack trace and the code frame where the assertion
+failed (when available). You can click on the blue file link to open the file
+where the error occurred in
+<a href="/guides/tooling/IDE-integration#File-Opener-Preference">your preferred file opener</a>.
+To read more about the error's display, read about
+<a href="/guides/guides/debugging#Errors">Debugging Errors</a>.</p>
+
+<img src="/_nuxt/img/failing-test.58ca1c9.png" alt="Failing test" class="docsImage_1KPA0">
+<p>Cypress provides a nice <a href="/guides/core-concepts/test-runner">Test Runner</a> that
+gives you a visual structure of suites, tests, and assertions. Soon you'll also
+see commands, page events, network requests, and more.</p>
+<video controls class="docsVideo_JyhYd"><source src="/_nuxt/videos/first-test-30fps.feb963f.mp4"></video>
+<div role="alert" class="alert_LKj6V info_2I0eB">
+<p><strong class="alert-header">What are describe, it, and expect?</strong></p>
+<p>All of these functions come from
+<a href="/guides/references/bundled-tools">Bundled Tools</a> that Cypress bakes in.</p>
+<ul>
+<li><code>describe</code> and <code>it</code> come from <a href="https://mochajs.org" rel="nofollow noopener noreferrer" target="_blank">Mocha</a></li>
+<li><code>expect</code> comes from <a href="http://www.chaijs.com" rel="nofollow noopener noreferrer" target="_blank">Chai</a></li>
+</ul>
+<p>Cypress builds on these popular tools and frameworks that you <em>hopefully</em>
+already have some familiarity and knowledge of. If not, that's okay too.</p>
+</div>
+<div role="alert" class="alert_LKj6V success_V+9lm">
+<p><strong class="alert-header">Using ESlint?</strong></p>
+<p>Check out our
+<a href="https://github.com/cypress-io/eslint-plugin-cypress" rel="nofollow noopener noreferrer" target="_blank">Cypress ESLint plugin</a>.</p>
+</div>
+<h2 id="Write-a-real-test"><a href="#Write-a-real-test" aria-hidden="true" tabindex="-1"><span class="icon icon-link"></span></a>Write a <em>real</em> test</h2>
+<p><strong>A solid test generally covers 3 phases:</strong></p>
+<ol>
+<li>Set up the application state.</li>
+<li>Take an action.</li>
+<li>Make an assertion about the resulting application state.</li>
+</ol>
+<p>You might also see this phrased as "Given, When, Then", or "Arrange, Act,
+Assert". But the idea is: First you put the application into a specific state,
+then you take some action in the application that causes it to change, and
+finally you check the resulting application state.</p>
+<p>Today, we'll take a narrow view of these steps and map them cleanly to Cypress
+commands:</p>
+<ol>
+<li>Visit a web page.</li>
+<li>Query for an element.</li>
+<li>Interact with that element.</li>
+<li>Assert about the content on the page.</li>
+</ol>
+<h3 id="Step-1-Visit-a-page"><a href="#Step-1-Visit-a-page" aria-hidden="true" tabindex="-1"><span class="icon icon-link"></span></a><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="globe" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512" class="svg-inline--fa fa-globe" style="color:inherit"><path fill="currentColor" d="M336.5 160C322 70.7 287.8 8 248 8s-74 62.7-88.5 152h177zM152 256c0 22.2 1.2 43.5 3.3 64h185.3c2.1-20.5 3.3-41.8 3.3-64s-1.2-43.5-3.3-64H155.3c-2.1 20.5-3.3 41.8-3.3 64zm324.7-96c-28.6-67.9-86.5-120.4-158-141.6 24.4 33.8 41.2 84.7 50 141.6h108zM177.2 18.4C105.8 39.6 47.8 92.1 19.3 160h108c8.7-56.9 25.5-107.8 49.9-141.6zM487.4 192H372.7c2.1 21 3.3 42.5 3.3 64s-1.2 43-3.3 64h114.6c5.5-20.5 8.6-41.8 8.6-64s-3.1-43.5-8.5-64zM120 256c0-21.5 1.2-43 3.3-64H8.6C3.2 212.5 0 233.8 0 256s3.2 43.5 8.6 64h114.6c-2-21-3.2-42.5-3.2-64zm39.5 96c14.5 89.3 48.7 152 88.5 152s74-62.7 88.5-152h-177zm159.3 141.6c71.4-21.2 129.4-73.7 158-141.6h-108c-8.8 56.9-25.6 107.8-50 141.6zM19.3 352c28.6 67.9 86.5 120.4 158 141.6-24.4-33.8-41.2-84.7-50-141.6h-108z"></path></svg> Step 1: Visit a page</h3>
+<p>First, let's visit a web page. We will visit our
+<a href="/examples/examples/applications#Kitchen-Sink">Kitchen Sink</a> application in this
+example so that you can try Cypress out without needing to worry about finding a
+page to test.</p>
+<p>We can pass the URL we want to visit to <a href="/api/commands/visit"><code>cy.visit()</code></a>.
+Let's replace our previous test with the one below that actually visits a page:</p>
+<div class="nuxt-content-highlight"><pre class="line-numbers language-js"><code><span class="token function">describe</span><span class="token punctuation">(</span><span class="token string">'My First Test'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
+  <span class="token function">it</span><span class="token punctuation">(</span><span class="token string">'Visits the Kitchen Sink'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
+    cy<span class="token punctuation">.</span><span class="token method function property-access">visit</span><span class="token punctuation">(</span><span class="token string">'https://example.cypress.io'</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre></div>
+<p>Save the file and switch back over to the Cypress Test Runner. You might notice
+a few things:</p>
+<ol>
+<li>The <a href="/guides/core-concepts/test-runner#Command-Log">Command Log</a> now shows
+the new <code>VISIT</code> action.</li>
+<li>The Kitchen Sink application has been loaded into the
+<a href="/guides/core-concepts/test-runner#Overview">App Preview</a> pane.</li>
+<li>The test is green, even though we made no assertions.</li>
+<li>The <code>VISIT</code> displays a <strong>blue pending state</strong> until the page finishes
+loading.</li>
+</ol>
+<p>Had this request come back with a non <code>2xx</code> status code such as <code>404</code> or <code>500</code>,
+or if there was a JavaScript error in the application's code, the test would
+have failed.</p>
+<video controls class="docsVideo_JyhYd"><source src="/_nuxt/videos/first-test-visit-30fps.629ca43.mp4"></video>
+<div role="alert" class="alert_LKj6V danger_gpGHD">
+<p><strong class="alert-header">Only Test Apps You Control</strong></p>
+<p>Although in this guide we are testing our example application:
+<a href="https://example.cypress.io" rel="nofollow noopener noreferrer" target="_blank"><code>https://example.cypress.io</code></a> - you <strong>shouldn't</strong>
+test applications you <strong>don't control</strong>. Why?</p>
+<ul>
+<li>They are liable to change at any moment which will break tests.</li>
+<li>They may do A/B testing which makes it impossible to get consistent results.</li>
+<li>They may detect you are a script and block your access (Google does this).</li>
+<li>They may have security features enabled which prevent Cypress from working.</li>
+</ul>
+<p>The point of Cypress is to be a tool you use every day to build and test <strong>your
+own applications</strong>.</p>
+<p>Cypress is not a <strong>general purpose</strong> web automation tool. It is poorly suited
+for scripting live, production websites not under your control.</p>
+</div>
+<h3 id="Step-2-Query-for-an-element"><a href="#Step-2-Query-for-an-element" aria-hidden="true" tabindex="-1"><span class="icon icon-link"></span></a><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="svg-inline--fa fa-search" style="color:inherit"><path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"></path></svg> Step 2: Query for an element</h3>
+<p>Now that we've got a page loaded, we need to take some action on it. Why don't
+we click a link on the page? Sounds easy enough, let's go look for one we
+like... how about <code>type</code>?</p>
+<p>To find this element by its contents, we'll use
+<a href="/api/commands/contains">cy.contains()</a>.</p>
+<p>Let's add it to our test and see what happens:</p>
+<div class="nuxt-content-highlight"><pre class="line-numbers language-js"><code><span class="token function">describe</span><span class="token punctuation">(</span><span class="token string">'My First Test'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
+  <span class="token function">it</span><span class="token punctuation">(</span><span class="token string">'finds the content "type"'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
+    cy<span class="token punctuation">.</span><span class="token method function property-access">visit</span><span class="token punctuation">(</span><span class="token string">'https://example.cypress.io'</span><span class="token punctuation">)</span>
+
+    cy<span class="token punctuation">.</span><span class="token method function property-access">contains</span><span class="token punctuation">(</span><span class="token string">'type'</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre></div>
+<p>Our test should now display <code>CONTAINS</code> in the
+<a href="/guides/core-concepts/test-runner#Command-Log">Command Log</a> and still be green.</p>
+<p>Even without adding an assertion, we know that everything is okay! This is
+because many of Cypress' commands are built to fail if they don't find what
+they're expecting to find. This is known as a
+<a href="/guides/core-concepts/introduction-to-cypress#Default-Assertions">Default Assertion</a>.</p>
+<p>To verify this, replace <code>type</code> with something not on the page, like <code>hype</code>.
+You'll notice the test goes red, but only after about 4 seconds!</p>
+<p>Can you see what Cypress is doing under the hood? It's automatically waiting and
+retrying because it expects the content to <strong>eventually</strong> be found in the DOM.
+It doesn't immediately fail!</p>
+
+<img src="/_nuxt/img/first-test-failing-contains.33e0262.png" alt="Test failing to not find content 'hype'" class="docsImage_1KPA0">
+<div role="alert" class="alert_LKj6V warning_iUVdm">
+<p><strong class="alert-header">Error Messages</strong></p>
+<p>We've taken care at Cypress to write hundreds of custom error messages that
+attempt to clearly explain what went wrong. In this case, Cypress <strong>timed out
+retrying</strong> to find the content <code>hype</code> within the entire page. To read more about
+the error's display, read about
+<a href="/guides/guides/debugging#Errors">Debugging Errors</a>.</p>
+</div>
+<p>Before we add another command - let's get this test back to passing. Replace
+<code>hype</code> with <code>type</code>.</p>
+<video controls class="docsVideo_JyhYd"><source src="/_nuxt/videos/first-test-contains-30fps.d13e431.mp4"></video>
+<h3 id="Step-3-Click-an-element"><a href="#Step-3-Click-an-element" aria-hidden="true" tabindex="-1"><span class="icon icon-link"></span></a><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="mouse-pointer" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="svg-inline--fa fa-mouse-pointer" style="color:inherit"><path fill="currentColor" d="M302.189 329.126H196.105l55.831 135.993c3.889 9.428-.555 19.999-9.444 23.999l-49.165 21.427c-9.165 4-19.443-.571-23.332-9.714l-53.053-129.136-86.664 89.138C18.729 472.71 0 463.554 0 447.977V18.299C0 1.899 19.921-6.096 30.277 5.443l284.412 292.542c11.472 11.179 3.007 31.141-12.5 31.141z"></path></svg> Step 3: Click an element</h3>
+<p>Ok, now we want to click on the link we found. How do we do that? Add a
+<a href="/api/commands/click">.click()</a> command to the end of the previous command, like
+so:</p>
+<div class="nuxt-content-highlight"><pre class="line-numbers language-js"><code><span class="token function">describe</span><span class="token punctuation">(</span><span class="token string">'My First Test'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
+  <span class="token function">it</span><span class="token punctuation">(</span><span class="token string">'clicks the link "type"'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
+    cy<span class="token punctuation">.</span><span class="token method function property-access">visit</span><span class="token punctuation">(</span><span class="token string">'https://example.cypress.io'</span><span class="token punctuation">)</span>
+
+    cy<span class="token punctuation">.</span><span class="token method function property-access">contains</span><span class="token punctuation">(</span><span class="token string">'type'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token method function property-access">click</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre></div>
+<p>You can almost read it like a little story! Cypress calls this "chaining" and we
+chain together commands to build tests that really express what the app does in
+a declarative way.</p>
+<p>Also note that the <a href="/guides/core-concepts/test-runner#Overview">App Preview</a>
+pane has updated further after the click, following the link and showing the
+destination page:</p>
+<p>Now we can assert something about this new page!</p>
+<video controls class="docsVideo_JyhYd"><source src="/_nuxt/videos/first-test-click-30fps.364e318.mp4"></video>
+<div role="alert" class="alert_LKj6V info_2I0eB">
+<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="magic" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="svg-inline--fa fa-magic" style="color:inherit"><path fill="currentColor" d="M224 96l16-32 32-16-32-16-16-32-16 32-32 16 32 16 16 32zM80 160l26.66-53.33L160 80l-53.34-26.67L80 0 53.34 53.33 0 80l53.34 26.67L80 160zm352 128l-26.66 53.33L352 368l53.34 26.67L432 448l26.66-53.33L512 368l-53.34-26.67L432 288zm70.62-193.77L417.77 9.38C411.53 3.12 403.34 0 395.15 0c-8.19 0-16.38 3.12-22.63 9.38L9.38 372.52c-12.5 12.5-12.5 32.76 0 45.25l84.85 84.85c6.25 6.25 14.44 9.37 22.62 9.37 8.19 0 16.38-3.12 22.63-9.37l363.14-363.15c12.5-12.48 12.5-32.75 0-45.24zM359.45 203.46l-50.91-50.91 86.6-86.6 50.91 50.91-86.6 86.6z"></path></svg>
+ You can see IntelliSense in your spec files by adding
+a single special comment line. Read about
+
+<a href="/guides/tooling/IDE-integration#Triple-slash-directives">Intelligent Code Completion</a>
+.
+</div>
+<h3 id="Step-4-Make-an-assertion"><a href="#Step-4-Make-an-assertion" aria-hidden="true" tabindex="-1"><span class="icon icon-link"></span></a><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="check-square" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="svg-inline--fa fa-check-square" style="color:inherit"><path fill="currentColor" d="M400 480H48c-26.51 0-48-21.49-48-48V80c0-26.51 21.49-48 48-48h352c26.51 0 48 21.49 48 48v352c0 26.51-21.49 48-48 48zm-204.686-98.059l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.248-16.379-6.249-22.628 0L184 302.745l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.25 16.379 6.25 22.628.001z"></path></svg> Step 4: Make an assertion</h3>
+<p>Let's make an assertion about something on the new page we clicked into. Perhaps
+we'd like to make sure the new URL is the expected URL. We can do that by
+looking up the URL and chaining an assertion to it with
+<a href="/api/commands/should">.should()</a>.</p>
+<p>Here's what that looks like:</p>
+<div class="nuxt-content-highlight"><pre class="line-numbers language-js"><code><span class="token function">describe</span><span class="token punctuation">(</span><span class="token string">'My First Test'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
+  <span class="token function">it</span><span class="token punctuation">(</span><span class="token string">'clicking "type" navigates to a new url'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
+    cy<span class="token punctuation">.</span><span class="token method function property-access">visit</span><span class="token punctuation">(</span><span class="token string">'https://example.cypress.io'</span><span class="token punctuation">)</span>
+
+    cy<span class="token punctuation">.</span><span class="token method function property-access">contains</span><span class="token punctuation">(</span><span class="token string">'type'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token method function property-access">click</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    <span class="token comment">// Should be on a new URL which includes '/commands/actions'</span>
+    cy<span class="token punctuation">.</span><span class="token method function property-access">url</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token method function property-access">should</span><span class="token punctuation">(</span><span class="token string">'include'</span><span class="token punctuation">,</span> <span class="token string">'/commands/actions'</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre></div>
+<h4 id="Adding-more-commands-and-assertions"><a href="#Adding-more-commands-and-assertions" aria-hidden="true" tabindex="-1"><span class="icon icon-link"></span></a>Adding more commands and assertions</h4>
+<p>We are not limited to a single interaction and assertion in a given test. In
+fact, many interactions in an application may require multiple steps and are
+likely to change your application state in more than one way.</p>
+<p>We can continue the interactions and assertions in this test by adding another
+chain to interact with and verify the behavior of elements on this new page.</p>
+<p>We can use <a href="/api/commands/get">cy.get()</a> to select an element based on a CSS
+class. Then we can use the <a href="/api/commands/type">.type()</a> command to enter text
+into the selected input. Finally, we can verify that the value of the input
+reflects the text that was typed with another <a href="/api/commands/should">.should()</a>.</p>
+<div class="nuxt-content-highlight"><pre class="line-numbers language-js"><code><span class="token function">describe</span><span class="token punctuation">(</span><span class="token string">'My First Test'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
+  <span class="token function">it</span><span class="token punctuation">(</span><span class="token string">'Gets, types and asserts'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
+    cy<span class="token punctuation">.</span><span class="token method function property-access">visit</span><span class="token punctuation">(</span><span class="token string">'https://example.cypress.io'</span><span class="token punctuation">)</span>
+
+    cy<span class="token punctuation">.</span><span class="token method function property-access">contains</span><span class="token punctuation">(</span><span class="token string">'type'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token method function property-access">click</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    <span class="token comment">// Should be on a new URL which includes '/commands/actions'</span>
+    cy<span class="token punctuation">.</span><span class="token method function property-access">url</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token method function property-access">should</span><span class="token punctuation">(</span><span class="token string">'include'</span><span class="token punctuation">,</span> <span class="token string">'/commands/actions'</span><span class="token punctuation">)</span>
+
+    <span class="token comment">// Get an input, type into it and verify that the value has been updated</span>
+    cy<span class="token punctuation">.</span><span class="token method function property-access">get</span><span class="token punctuation">(</span><span class="token string">'.action-email'</span><span class="token punctuation">)</span>
+      <span class="token punctuation">.</span><span class="token method function property-access">type</span><span class="token punctuation">(</span><span class="token string">'<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="335552585673565e525a5f1d505c5e">[email&#160;protected]</a>'</span><span class="token punctuation">)</span>
+      <span class="token punctuation">.</span><span class="token method function property-access">should</span><span class="token punctuation">(</span><span class="token string">'have.value'</span><span class="token punctuation">,</span> <span class="token string">'<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e385828886a3868e828a8fcd808c8e">[email&#160;protected]</a>'</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre></div>
+<p>And there you have it: a short test in Cypress that visits a page, finds and
+clicks a link, verifies the URL and then verifies the behavior of an element on
+the new page. If we read it out loud, it might sound like:</p>
+<blockquote>
+<ol>
+<li>Visit: <code>https://example.cypress.io</code></li>
+<li>Find the element with content: <code>type</code></li>
+<li>Click on it</li>
+<li>Get the URL</li>
+<li>Assert it includes: <code>/commands/actions</code></li>
+<li>Get the input with the <code>.action-email</code> class</li>
+<li>Type <code><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="abcdcac0ceebcec6cac2c785c8c4c6">[email&#160;protected]</a></code> into the input</li>
+<li>Assert the input reflects the new value</li>
+</ol>
+</blockquote>
+<p>Or in the Given, When, Then syntax:</p>
+<blockquote>
+<ol>
+<li>Given a user visits <code>https://example.cypress.io</code></li>
+<li>When they click the link labeled <code>type</code></li>
+<li>And they type "<a href="/cdn-cgi/l/email-protection#6701060c0227020a060e0b4904080a"><span class="__cf_email__" data-cfemail="284e49434d684d45494144064b4745">[email&#160;protected]</span></a>" into the <code>.action-email</code> input</li>
+<li>Then the URL should include <code>/commands/actions</code></li>
+<li>And the <code>.action-email</code> input has "<a href="/cdn-cgi/l/email-protection#791f18121c391c14181015571a1614"><span class="__cf_email__" data-cfemail="0167606a6441646c60686d2f626e6c">[email&#160;protected]</span></a>" as its value</li>
+</ol>
+</blockquote>
+<p>And hey, this is a very clean test! We didn't have to say anything about <em>how</em>
+things work, just that we'd like to verify a particular series of events and
+outcomes.</p>
+<video controls class="docsVideo_JyhYd"><source src="/_nuxt/videos/first-test-assertions-30fps.dee89bf.mp4"></video>
+<div role="alert" class="alert_LKj6V info_2I0eB">
+<p><strong class="alert-header">Page Transitions</strong></p>
+<p>Worth noting is that this test transitioned across two different pages.</p>
+<ol>
+<li>The initial <a href="/api/commands/visit">cy.visit()</a></li>
+<li>The <a href="/api/commands/click">.click()</a> to a new page</li>
+</ol>
+<p>Cypress automatically detects things like a <code>page transition event</code> and will
+automatically <strong>halt</strong> running commands until the next page has <strong>finished</strong>
+loading.</p>
+<p>Had the <strong>next page</strong> not finished its loading phase, Cypress would have ended
+the test and presented an error.</p>
+<p>Under the hood - this means you don't have to worry about commands accidentally
+running against a stale page, nor do you have to worry about running commands
+against a partially loaded page.</p>
+<p>We mentioned previously that Cypress waited <strong>4 seconds</strong> before timing out
+finding a DOM element - but in this case, when Cypress detects a
+<code>page transition event</code> it automatically increases the timeout to <strong>60 seconds</strong>
+for the single <code>PAGE LOAD</code> event.</p>
+<p>In other words, based on the commands and the events happening, Cypress
+automatically alters its expected timeouts to match web application behavior.</p>
+<p>These various timeouts are defined in the
+<a href="/guides/references/configuration#Timeouts">Configuration</a> document.</p>
+</div>
+<h2 id="Debugging"><a href="#Debugging" aria-hidden="true" tabindex="-1"><span class="icon icon-link"></span></a>Debugging</h2>
+<p>Cypress comes with a host of debugging tools to help you understand a test.</p>
+<p><strong>We give you the ability to:</strong></p>
+<ul>
+<li>Travel back in time to each command's snapshot.</li>
+<li>See special <code>page events</code> that happened.</li>
+<li>Receive additional output about each command.</li>
+<li>Step forward / backward between multiple command snapshots.</li>
+<li>Pause commands and step through them iteratively.</li>
+<li>Visualize when hidden or multiple elements are found.</li>
+</ul>
+<p>Let's see some of this in action using our existing test code.</p>
+<h3 id="Time-travel"><a href="#Time-travel" aria-hidden="true" tabindex="-1"><span class="icon icon-link"></span></a>Time travel</h3>
+<p>Take your mouse and <strong>hover over</strong> the <code>CONTAINS</code> command in the Command Log.</p>
+<p>Do you see what happened?</p>
+<img src="/_nuxt/img/first-test-hover-contains.b5824b8.png" alt="Hovering over the contains tab highlights the dom element in the App in the Test Runner" class="docsImage_1KPA0">
+<p>Cypress automatically traveled back in time to a snapshot of when that command
+resolved. Additionally, since <a href="/api/commands/contains"><code>cy.contains()</code></a> finds
+DOM elements on the page, Cypress also highlights the element and scrolls it
+into view (to the top of the page).</p>
+<p>Now if you remember at the end of the test we ended up on a different URL:</p>
+<blockquote>
+<p><a href="https://example.cypress.io/commands/actions" rel="nofollow noopener noreferrer" target="_blank">https://example.cypress.io/commands/actions</a></p>
+</blockquote>
+<p>But as we hover over the <code>CONTAINS</code>, Cypress reverts back to the URL that was
+present when our snapshot was taken.</p>
+<img src="/_nuxt/img/first-test-url-revert.b6c3e7f.png" alt="The url address bar shows https://example.cypress.io/" class="docsImage_1KPA0">
+<h3 id="Snapshots"><a href="#Snapshots" aria-hidden="true" tabindex="-1"><span class="icon icon-link"></span></a>Snapshots</h3>
+<p>Commands are also interactive. Go ahead and click on the <code>CLICK</code> command.</p>
+<img src="/_nuxt/img/first-test-click-revert.b0dde22.png" alt="A click on the click command in the Command Log with Test Runner labeled as 1, 2, 3" class="docsImage_1KPA0">
+<p>Notice it highlights in purple. This did three things worth noting...</p>
+<h4 id="1-Pinned-snapshots"><a href="#1-Pinned-snapshots" aria-hidden="true" tabindex="-1"><span class="icon icon-link"></span></a>1. Pinned snapshots</h4>
+<p>We have now <strong>pinned</strong> this snapshot. Hovering over other commands will not
+revert to them. This gives us a chance to manually inspect the DOM of our
+application under test at the time the snapshot was taken.</p>
+<h4 id="2-Event-hitbox"><a href="#2-Event-hitbox" aria-hidden="true" tabindex="-1"><span class="icon icon-link"></span></a>2. Event hitbox</h4>
+<p>Since <a href="/api/commands/click"><code>.click()</code></a> is an action command, that means we also
+see a red hitbox at the coordinates the event took place.</p>
+<h4 id="3-Snapshot-menu-panel"><a href="#3-Snapshot-menu-panel" aria-hidden="true" tabindex="-1"><span class="icon icon-link"></span></a>3. Snapshot menu panel</h4>
+<p>There is also a new menu panel. Some commands (like action commands) will take
+multiple snapshots: <strong>before</strong> and <strong>after</strong>. We can now cycle through these.</p>
+<p>The <strong>before</strong> snapshot is taken prior to the click event firing. The <strong>after</strong>
+snapshot is taken immediately after the click event. Although this click event
+caused our browser to load a new page, it's not an instantaneous transition.
+Depending on how fast your page loaded, you may still see the same page, or a
+blank screen as the page is unloading and in transition.</p>
+<p>When a command causes an immediate visual change in our application, cycling
+between before and after will update our snapshot. We can see this in action by
+clicking the <code>TYPE</code> command in the Command Log. Now, clicking <strong>before</strong> will
+show us the input in a default state, showing the placeholder text. Click
+<strong>after</strong> will show us what the input looks like when the <code>TYPE</code> command has
+completed.</p>
+<h3 id="Errors"><a href="#Errors" aria-hidden="true" tabindex="-1"><span class="icon icon-link"></span></a>Errors</h3>
+<p>Cypress prints several pieces of information when an error occurs during a
+Cypress test.</p>
+<ol>
+<li><strong>Error name</strong>: This is the type of the error (e.g. AssertionError,
+CypressError)</li>
+<li><strong>Error message</strong>: This generally tells you what went wrong. It can vary in
+length. Some are short like in the example, while some are long, and may tell
+you exactly how to fix the error.</li>
+<li><strong>Learn more:</strong> Some error messages contain a Learn more link that will take
+you to relevant Cypress documentation.</li>
+<li><strong>Code frame file</strong>: This is usually the top line of the stack trace and it
+shows the file, line number, and column number that is highlighted in the
+code frame below. Clicking on this link will open the file in your
+<a href="https://on.cypress.io/IDE-integration#File-Opener-Preference" rel="nofollow noopener noreferrer" target="_blank">preferred file opener</a>
+and highlight the line and column in editors that support it.</li>
+<li><strong>Code frame</strong>: This shows a snippet of code where the failure occurred, with
+the relevant line and column highlighted.</li>
+<li><strong>View stack trace</strong>: Clicking this toggles the visibility of the stack
+trace. Stack traces vary in length. Clicking on a blue file path will open
+the file in your
+<a href="https://on.cypress.io/IDE-integration#File-Opener-Preference" rel="nofollow noopener noreferrer" target="_blank">preferred file opener</a>.</li>
+<li><strong>Print to console button</strong>: Click this to print the full error to your
+DevTools console. This will usually allow you to click on lines in the stack
+trace and open files in your DevTools.</li>
+</ol>
+<img src="/_nuxt/img/command-failure-error.eea4106.png" alt="example command failure error" class="docsImage_1KPA0">
+<h3 id="Page-events"><a href="#Page-events" aria-hidden="true" tabindex="-1"><span class="icon icon-link"></span></a>Page events</h3>
+<p>Notice there is also a funny looking Log called: <code>(PAGE LOAD)</code> followed by
+another entry for <code>(NEW URL)</code>. Neither of these was a command that we issued -
+rather Cypress itself will log out important events from your application when
+they occur. Notice these look different (they are gray and without a number).</p>
+<img src="/_nuxt/img/first-test-page-load.524b3d8.png" alt="Command log shows 'Page load --page loaded--' and 'New url https://example.cypress.io/'" class="docsImage_1KPA0">
+<p><strong>Cypress logs out page events for:</strong></p>
+<ul>
+<li>Network XHR Requests</li>
+<li>URL hash changes</li>
+<li>Page Loads</li>
+<li>Form Submissions</li>
+</ul>
+<h3 id="Console-output"><a href="#Console-output" aria-hidden="true" tabindex="-1"><span class="icon icon-link"></span></a>Console output</h3>
+<p>Besides Commands being interactive, they also output additional debugging
+information to your console.</p>
+<p>Open up your Dev Tools and click on the <code>GET</code> for the <code>.action-email</code> class
+selector.</p>
+<img src="/_nuxt/img/first-test-console-output.add7a6e.png" alt="Test Runner with get command pinned and console log open showing the yielded element" class="docsImage_1KPA0">
+<p><strong>We can see Cypress output additional information in the console:</strong></p>
+<ul>
+<li>Command (that was issued)</li>
+<li>Yielded (what was returned by this command)</li>
+<li>Elements (the number of elements found)</li>
+<li>Selector (the argument we used)</li>
+</ul>
+<p>We can even expand what was returned and inspect each individual element or even
+right click and inspect them in the Elements panel!</p>
+<h3 id="Special-commands"><a href="#Special-commands" aria-hidden="true" tabindex="-1"><span class="icon icon-link"></span></a>Special commands</h3>
+<p>In addition to having a helpful UI, there are also special commands dedicated to
+the task of debugging.</p>
+<p>For instance there is:</p>
+<ul>
+<li><a href="/api/commands/pause">cy.pause()</a></li>
+<li><a href="/api/commands/debug">cy.debug()</a></li>
+</ul>
+<p>Let's add a <a href="/api/commands/pause">cy.pause()</a> to our test code and see what
+happens.</p>
+<div class="nuxt-content-highlight"><pre class="line-numbers language-js"><code><span class="token function">describe</span><span class="token punctuation">(</span><span class="token string">'My First Test'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
+  <span class="token function">it</span><span class="token punctuation">(</span><span class="token string">'clicking "type" shows the right headings'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
+    cy<span class="token punctuation">.</span><span class="token method function property-access">visit</span><span class="token punctuation">(</span><span class="token string">'https://example.cypress.io'</span><span class="token punctuation">)</span>
+
+    cy<span class="token punctuation">.</span><span class="token method function property-access">pause</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    cy<span class="token punctuation">.</span><span class="token method function property-access">contains</span><span class="token punctuation">(</span><span class="token string">'type'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token method function property-access">click</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    <span class="token comment">// Should be on a new URL which includes '/commands/actions'</span>
+    cy<span class="token punctuation">.</span><span class="token method function property-access">url</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token method function property-access">should</span><span class="token punctuation">(</span><span class="token string">'include'</span><span class="token punctuation">,</span> <span class="token string">'/commands/actions'</span><span class="token punctuation">)</span>
+
+    <span class="token comment">// Get an input, type into it and verify that the value has been updated</span>
+    cy<span class="token punctuation">.</span><span class="token method function property-access">get</span><span class="token punctuation">(</span><span class="token string">'.action-email'</span><span class="token punctuation">)</span>
+      <span class="token punctuation">.</span><span class="token method function property-access">type</span><span class="token punctuation">(</span><span class="token string">'<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c7a1a6aca287a2aaa6aeabe9a4a8aa">[email&#160;protected]</a>'</span><span class="token punctuation">)</span>
+      <span class="token punctuation">.</span><span class="token method function property-access">should</span><span class="token punctuation">(</span><span class="token string">'have.value'</span><span class="token punctuation">,</span> <span class="token string">'<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="6006010b0520050d01090c4e030f0d">[email&#160;protected]</a>'</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre></div>
+<p>Now Cypress provides us a UI (similar to debugger) to step forward through each
+command.</p>
+<img src="/_nuxt/img/first-test-paused.c65834e.png" alt="Test Runner shows label saying 'Paused' with Command Log showing 'Pause'" class="docsImage_1KPA0">
+<h4 id="In-action"><a href="#In-action" aria-hidden="true" tabindex="-1"><span class="icon icon-link"></span></a>In action</h4>
+<video controls class="docsVideo_JyhYd"><source src="/_nuxt/videos/first-test-debugging-30fps.244a5cd.mp4"></video>
+<h2 id="Next-steps"><a href="#Next-steps" aria-hidden="true" tabindex="-1"><span class="icon icon-link"></span></a>Next steps</h2>
+<ul>
+<li>Start <a href="/guides/getting-started/testing-your-app">testing your app</a>.</li>
+<li>Set up
+<a href="/guides/tooling/IDE-integration#Intelligent-Code-Completion">intelligent code completion</a>
+for Cypress commands and assertions.</li>
+<li>Check out the <svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="github" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512" class="svg-inline--fa fa-github" style="color:inherit"><path fill="currentColor" d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg>
+<a href="https://github.com/cypress-io/cypress-realworld-app" rel="nofollow noopener noreferrer" target="_blank">Cypress Real World App (RWA)</a>
+for practical demonstrations of Cypress testing practices, configuration, and
+strategies in a real-world project.</li>
+<li>Search Cypress's documentation to quickly find what you need.</li>
+</ul>
+<img src="/_nuxt/img/search-box.3381d7d.png" alt="Use the search box to find relevant documentation" class="docsImage_1KPA0"></div> <footer class="bg-white clear-both"><div class="max-w-7xl mx-auto py-12 px-4 overflow-hidden sm:px-6 lg:px-8"><nav aria-label="Footer" class="-mx-5 -my-2 flex flex-wrap justify-center"><div class="px-5 py-2"><a href="https://www.cypress.io/about" class="text-base text-gray-500 hover:text-gray-900">
+          About
+        </a></div> <div class="px-5 py-2"><a href="https://discord.gg/cMjUZg7" class="text-base text-gray-500 hover:text-gray-900">
+          Discord
+        </a></div> <div class="px-5 py-2"><a href="https://github.com/cypress-io/cypress/discussions" class="text-base text-gray-500 hover:text-gray-900">
+          Discussions
+        </a></div> <div class="px-5 py-2"><a href="https://on.cypress.io/changelog" class="text-base text-gray-500 hover:text-gray-900">
+          Changelog
+        </a></div> <div class="px-5 py-2"><a href="https://on.cypress.io/roadmap" class="text-base text-gray-500 hover:text-gray-900">
+          Roadmap
+        </a></div> <div class="px-5 py-2"><a href="https://www.cypress.io/jobs" class="text-base text-gray-500 hover:text-gray-900">
+          Jobs
+        </a></div></nav> <div class="mt-8 flex justify-center space-x-6"><a href="https://github.com/cypress-io/cypress" class="text-gray-400 hover:text-gray-500"><span class="sr-only">GitHub</span> <svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="github" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512" class="svg-inline--fa fa-github" style="color:inherit"><path fill="currentColor" d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg></a> <a href="https://www.youtube.com/channel/UC-EOsTo2l2x39e4JmSaWNRQ" class="text-gray-400 hover:text-gray-500"><span class="sr-only">YouTube</span> <svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="youtube" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="svg-inline--fa fa-youtube" style="color:inherit"><path fill="currentColor" d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z"></path></svg></a> <a href="https://twitter.com/Cypress_io" class="text-gray-400 hover:text-gray-500"><span class="sr-only">Twitter</span> <svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="twitter" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="svg-inline--fa fa-twitter" style="color:inherit"><path fill="currentColor" d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"></path></svg></a></div> <p class="mt-8 text-center text-base text-gray-500">
+      © 2022 Cypress.io. All rights reserved.
+    </p></div></footer></article></div> <div class="hidden xl:block xl:col-span-2 mt-16 lg:z-10"><nav class="fixed w-sidebar top-16 bottom-0 right-0 pl-4 pr-8 pb-8 overflow-y-auto space-y-4 hide-scroll toc-content"><h3 class="tocHeading_X0ZME">ON THIS PAGE</h3> <ul class="scrollactive-nav"><li class="text-gray-500 dark:text-gray-300 pb-1"><a href="#What-you-ll-learn" class="block text-sm scrollactive-item pl-1 hover:text-green transition-colors py-1 pb-2 pl-2 font-bold"> What you'll learn</a></li><li class="text-gray-500 dark:text-gray-300 pb-1"><a href="#Add-a-test-file" class="block text-sm scrollactive-item pl-1 hover:text-green transition-colors py-1 pb-2 pl-2 font-bold">Add a test file</a></li><li class="text-gray-500 dark:text-gray-300 pb-1"><a href="#Write-your-first-test" class="block text-sm scrollactive-item pl-1 hover:text-green transition-colors py-1 pb-2 pl-2 font-bold">Write your first test</a></li><li class="text-gray-500 dark:text-gray-300 pb-1"><a href="#Write-a-real-test" class="block text-sm scrollactive-item pl-1 hover:text-green transition-colors py-1 pb-2 pl-2 font-bold">Write a real test</a></li><li class="text-gray-500 dark:text-gray-300"><a href="#Step-1-Visit-a-page" class="block text-sm scrollactive-item pl-1 hover:text-green transition-colors ml-4 py-1 pl-2 border-l-2 border-gray-200"> Step 1: Visit a page</a></li><li class="text-gray-500 dark:text-gray-300"><a href="#Step-2-Query-for-an-element" class="block text-sm scrollactive-item pl-1 hover:text-green transition-colors ml-4 py-1 pl-2 border-l-2 border-gray-200"> Step 2: Query for an element</a></li><li class="text-gray-500 dark:text-gray-300"><a href="#Step-3-Click-an-element" class="block text-sm scrollactive-item pl-1 hover:text-green transition-colors ml-4 py-1 pl-2 border-l-2 border-gray-200"> Step 3: Click an element</a></li><li class="text-gray-500 dark:text-gray-300"><a href="#Step-4-Make-an-assertion" class="block text-sm scrollactive-item pl-1 hover:text-green transition-colors ml-4 py-1 pl-2 border-l-2 border-gray-200"> Step 4: Make an assertion</a></li><li class="text-gray-500 dark:text-gray-300 pt-4 pb-1"><a href="#Debugging" class="block text-sm scrollactive-item pl-1 hover:text-green transition-colors py-1 pb-2 pl-2 font-bold">Debugging</a></li><li class="text-gray-500 dark:text-gray-300"><a href="#Time-travel" class="block text-sm scrollactive-item pl-1 hover:text-green transition-colors ml-4 py-1 pl-2 border-l-2 border-gray-200">Time travel</a></li><li class="text-gray-500 dark:text-gray-300"><a href="#Snapshots" class="block text-sm scrollactive-item pl-1 hover:text-green transition-colors ml-4 py-1 pl-2 border-l-2 border-gray-200">Snapshots</a></li><li class="text-gray-500 dark:text-gray-300"><a href="#Errors" class="block text-sm scrollactive-item pl-1 hover:text-green transition-colors ml-4 py-1 pl-2 border-l-2 border-gray-200">Errors</a></li><li class="text-gray-500 dark:text-gray-300"><a href="#Page-events" class="block text-sm scrollactive-item pl-1 hover:text-green transition-colors ml-4 py-1 pl-2 border-l-2 border-gray-200">Page events</a></li><li class="text-gray-500 dark:text-gray-300"><a href="#Console-output" class="block text-sm scrollactive-item pl-1 hover:text-green transition-colors ml-4 py-1 pl-2 border-l-2 border-gray-200">Console output</a></li><li class="text-gray-500 dark:text-gray-300"><a href="#Special-commands" class="block text-sm scrollactive-item pl-1 hover:text-green transition-colors ml-4 py-1 pl-2 border-l-2 border-gray-200">Special commands</a></li><li class="text-gray-500 dark:text-gray-300 pt-4 pb-1"><a href="#Next-steps" class="block text-sm scrollactive-item pl-1 hover:text-green transition-colors py-1 pb-2 pl-2 font-bold">Next steps</a></li></ul> <a href="#" class="text-blue text-sm"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="long-arrow-alt-up" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512" class="svg-inline--fa fa-long-arrow-alt-up" style="color:inherit"><path fill="currentColor" d="M88 166.059V468c0 6.627 5.373 12 12 12h56c6.627 0 12-5.373 12-12V166.059h46.059c21.382 0 32.09-25.851 16.971-40.971l-86.059-86.059c-9.373-9.373-24.569-9.373-33.941 0l-86.059 86.059c-15.119 15.119-4.411 40.971 16.971 40.971H88z"></path></svg> Back to Top</a></nav></div></main></div></div></div></div><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script defer src="/_nuxt/static/1652113017/guides/getting-started/writing-your-first-test/state.js" type="1a7a89fb45b679b02cdc4570-text/javascript"></script><script src="/_nuxt/8b69df9.js" defer type="1a7a89fb45b679b02cdc4570-text/javascript"></script><script src="/_nuxt/3b80929.js" defer type="1a7a89fb45b679b02cdc4570-text/javascript"></script><script src="/_nuxt/9db1c41.js" defer type="1a7a89fb45b679b02cdc4570-text/javascript"></script><script src="/_nuxt/2ebfa9d.js" defer type="1a7a89fb45b679b02cdc4570-text/javascript"></script><script src="/_nuxt/6772fec.js" defer type="1a7a89fb45b679b02cdc4570-text/javascript"></script><script src="/_nuxt/40813bb.js" defer type="1a7a89fb45b679b02cdc4570-text/javascript"></script><script src="/_nuxt/1dbf855.js" defer type="1a7a89fb45b679b02cdc4570-text/javascript"></script><script src="/_nuxt/de479ea.js" defer type="1a7a89fb45b679b02cdc4570-text/javascript"></script><script src="/_nuxt/bd00d3b.js" defer type="1a7a89fb45b679b02cdc4570-text/javascript"></script><script src="/_nuxt/864ef82.js" defer type="1a7a89fb45b679b02cdc4570-text/javascript"></script>
+  <script src="/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="1a7a89fb45b679b02cdc4570-|49" defer=""></script></body>
+</html>
