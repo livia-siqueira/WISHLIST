@@ -12,6 +12,7 @@ export const Link = styled.button`
 
 export const ItemInformation = styled.div`
   display: grid;
-  gap: 0.5rem;
+  justify-content: center;
+  align-items: center;
   grid-template-columns: 16px 10rem;
 `;

@@ -1,4 +1,4 @@
-import { Information } from "../../atoms/Information";
+import { Information } from "@/components/atoms";
 import { SectionInfos } from "./styles";
 import { AiFillHeart } from "react-icons/ai";
 import { ImLocation2 } from "react-icons/im";

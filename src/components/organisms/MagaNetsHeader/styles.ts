@@ -4,11 +4,11 @@ export const Header = styled.header`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  background-color: #451776;
+  background-color: ${({ theme }) => theme.colors.purple};
   height: 10rem;
-  //width: 100%;
+  width: 100vw;
 
-  @media (max-width: 768px) {
+  @media (max-width: 1000px) {
     height: 15rem;
     flex-direction: column;
     justify-content: center;
@@ -23,7 +23,7 @@ export const AreaRight = styled.div`
   flex-direction: column;
   gap: 1.2rem;
 
-  @media (max-width: 768px) {
+  @media (max-width: 1000px) {
     width: 100%;
   }
 `;

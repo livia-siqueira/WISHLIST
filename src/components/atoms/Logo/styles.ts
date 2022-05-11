@@ -6,7 +6,7 @@ export const Title = styled.h2`
   font-weight: bolder;
   align-self: start;
 
-  @media (max-width: 768px) {
+  @media (max-width: 1000px) {
     align-self: auto;
   }
 `;

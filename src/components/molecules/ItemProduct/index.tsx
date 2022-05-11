@@ -1,5 +1,5 @@
-import { AiFillCloseCircle, AiOutlineCloseCircle } from "react-icons/ai";
-import { Product } from "../../../shared/types";
+import { AiOutlineCloseCircle } from "react-icons/ai";
+import { Product } from "@/shared/index";
 import {
   ButtonFavorite,
   ButtonRemove,

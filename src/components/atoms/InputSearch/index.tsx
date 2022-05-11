@@ -1,6 +1,4 @@
-import { ChangeEvent, useState } from "react";
-import { useCallback } from "react";
-import { useStore } from "../../../store";
+import { ChangeEvent } from "react";
 import { AreaSearch, IconSearch, Input } from "./styles";
 
 interface IPropsInputSearch {

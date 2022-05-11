@@ -1,13 +1,16 @@
 import type { AppProps } from "next/app";
-import { GlobalStyles } from "../shared/styles/global";
-import { Provider, useCreateStore } from "../store";
+import { ThemeProvider } from "styled-components";
+import { GlobalStyles, theme } from "@/shared/index";
+import { Provider, useCreateStore } from "@/store/index";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const createStore = useCreateStore(pageProps.initialZustandState);
   return (
     <Provider createStore={createStore}>
-      <GlobalStyles />
-      <Component {...pageProps} />
+      <ThemeProvider theme={theme}>
+        <GlobalStyles />
+        <Component {...pageProps} />
+      </ThemeProvider>
     </Provider>
   );
 }

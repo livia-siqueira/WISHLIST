@@ -1,7 +1,6 @@
 import { ChangeEvent } from "react";
-import { InputSearch } from "../../atoms/InputSearch";
-import { Logo } from "../../atoms/Logo";
-import { AreaInformantions } from "../../molecules/AreaInformations";
+import { InputSearch, Logo } from "@/components/atoms";
+import { AreaInformantions } from "@/components/molecules";
 import { AreaRight, Header } from "./styles";
 
 interface IPropsMagaNetsHeader {

@@ -12,7 +12,7 @@ export const Main = styled.main`
   flex-direction: column;
   margin-top: 1.2rem;
 
-  @media (max-width: 768px) {
+  @media (max-width: 1000px) {
     padding: 0 1rem;
   }
 `;
@@ -27,7 +27,7 @@ export const AreaLinks = styled.div`
     align-self: start;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 1000px) {
     padding: 0;
     a {
       font-size: 0.85rem;

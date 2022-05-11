@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { ChangeEvent, ReactNode } from "react";
-import { MagaNetsHeader } from "../../organisms";
+import { MagaNetsHeader } from "@/components/organisms";
 import { AreaLinks, Container, Main } from "./styles";
 
 interface IPropsLayout {
@@ -24,7 +24,7 @@ export const Layout = ({
       <MagaNetsHeader onSearch={onSearch} />
       <Main>
         <AreaLinks>
-          <a onClick={() => routes.back()}>Home </a>
+          <a onClick={() => routes.back()}>Home</a>
           <a onClick={() => routes.push("wishlist")}>
             {ListaDesejos && titlesPages["ListaDesejos"]}
           </a>

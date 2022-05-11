@@ -2,7 +2,7 @@ import { useLayoutEffect } from "react";
 import create, { UseBoundStore } from "zustand";
 import createContext from "zustand/context";
 import { combine } from "zustand/middleware";
-import { Product } from "../shared/types";
+import { Product } from "@/shared/index";
 
 type InitialState = {
   wishlist: Product[];

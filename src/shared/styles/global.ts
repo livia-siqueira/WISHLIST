@@ -17,10 +17,6 @@ export const GlobalStyles = createGlobalStyle`
     font-style: normal;
     transition: all 0.50s linear;
     overflow-x: hidden ;
-
-    @media (max-width: 768px){
-    span{font-size: 0.6rem;}
-  }
   }
 
 

@@ -1,6 +1,6 @@
-import { Product } from "../../../shared/types";
-import { useStore } from "../../../store";
-import { ItemProduct } from "../../molecules/ItemProduct";
+import { Product } from "@/shared/index";
+import { useStore } from "@/store/index";
+import { ItemProduct } from "@/components/molecules";
 import { List, MessageEmptyProducts } from "./styles";
 
 interface IPropsListsProducts {
@@ -28,7 +28,7 @@ export const ListProducts = ({
   const { wishlist, addProductInWishlist, removeProductInWishlist } =
     useStore();
 
-  const filteredList = listProducts.filter((productItem) => {
+  const filteredList = listProducts?.filter((productItem) => {
     if (searchProduct?.length === 0 || !searchProduct) {
       return productItem;
     }
@@ -39,18 +39,19 @@ export const ListProducts = ({
     }
   });
 
-  if (listProducts.length === 0 || filteredList.length === 0) {
+  if (listProducts.length === 0 || filteredList?.length === 0) {
     return <MessageEmptyProducts>{messages[page]}</MessageEmptyProducts>;
   }
+
   return (
     <List>
-      {filteredList.map((product) => {
-        const isSelected = wishlist.includes(product);
+      {filteredList?.map((product) => {
+        const isSelected = wishlist?.includes(product);
         return (
           <ItemProduct
             key={product.id}
             page={page}
-            isSelected={isSelected}
+            isSelected={isSelected ?? false}
             onClick={
               isSelected ? removeProductInWishlist : addProductInWishlist
             }
