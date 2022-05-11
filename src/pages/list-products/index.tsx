@@ -1,27 +1,15 @@
-import { ItemProduct } from "../../components/molecules/ItemProduct";
 import { Layout } from "../../components/templates/Layout";
-import { Product, TAllProducts } from "../../shared/types";
-import { List } from "./styles";
+import { ListProducts } from "../../components/templates/ListProducts";
+import { Product } from "../../shared/types";
 
 interface IPropsListProducts {
   products: Product[];
 }
 
-export default function ListProducts({ products }: IPropsListProducts) {
-  console.log(products);
+export default function List({ products }: IPropsListProducts) {
   return (
     <Layout>
-      <h1>Home</h1>
-      <List>
-        {products.map((product) => (
-          <ItemProduct
-            price={product.price}
-            image={product.image}
-            title={product.title}
-            currency={product.currencyFormat}
-          />
-        ))}
-      </List>
+      <ListProducts listProducts={products} page={`Home`} />
     </Layout>
   );
 }

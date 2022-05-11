@@ -1,3 +1,12 @@
+import { Layout } from "../../components/templates/Layout";
+import { ListProducts } from "../../components/templates/ListProducts";
+import { useStore } from "../../store";
+
 export default function Wishlist() {
-  return <h1>Wishlist</h1>;
+  const { wishlist } = useStore();
+  return (
+    <Layout ListaDesejos>
+      <ListProducts listProducts={wishlist} page={`Wishlist`} />
+    </Layout>
+  );
 }

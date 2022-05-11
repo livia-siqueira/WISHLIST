@@ -1,9 +1,13 @@
 import styled from "styled-components";
 
-export const Link = styled.a`
+export const Link = styled.button`
   color: white;
   font-size: 0.9rem;
-  text-align: l;
+  text-align: left;
+  background-color: transparent;
+  border: none;
+  display: flex;
+  width: 20rem;
 `;
 
 export const ItemInformation = styled.div`

@@ -4,6 +4,10 @@ export const GlobalStyles = createGlobalStyle`
   * {
     box-sizing: border-box;
   }
+
+  button, a {
+    cursor: pointer;
+  }
   body {
     margin: 0;
     height: 100vh;
