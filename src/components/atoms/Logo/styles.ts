@@ -5,4 +5,8 @@ export const Title = styled.h2`
   color: white;
   font-weight: bolder;
   align-self: start;
+
+  @media (max-width: 768px) {
+    align-self: auto;
+  }
 `;
