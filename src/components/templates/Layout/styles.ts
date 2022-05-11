@@ -12,9 +12,8 @@ export const Main = styled.main`
   flex-direction: column;
   margin-top: 1.2rem;
 
-  h1 {
-    font-weight: bold;
-    font-size: 1.4rem;
+  @media (max-width: 768px) {
+    padding: 0 1rem;
   }
 `;
 
@@ -26,5 +25,12 @@ export const AreaLinks = styled.div`
     font-weight: bold;
     font-size: 1.5rem;
     align-self: start;
+  }
+
+  @media (max-width: 768px) {
+    padding: 0;
+    a {
+      font-size: 0.85rem;
+    }
   }
 `;

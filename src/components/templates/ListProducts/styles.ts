@@ -9,3 +9,8 @@ export const List = styled.ul`
   margin-top: 6rem;
   padding: 0;
 `;
+
+export const MessageEmptyProducts = styled.span`
+  margin-top: 2rem;
+  font-size: 70%;
+`;

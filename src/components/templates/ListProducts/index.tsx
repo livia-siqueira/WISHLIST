@@ -1,7 +1,7 @@
 import { Product } from "../../../shared/types";
 import { useStore } from "../../../store";
 import { ItemProduct } from "../../molecules/ItemProduct";
-import { List } from "./styles";
+import { List, MessageEmptyProducts } from "./styles";
 
 interface IPropsListsProducts {
   listProducts: Product[];
@@ -40,7 +40,7 @@ export const ListProducts = ({
   });
 
   if (listProducts.length === 0 || filteredList.length === 0) {
-    return <p>{messages[page]}</p>;
+    return <MessageEmptyProducts>{messages[page]}</MessageEmptyProducts>;
   }
   return (
     <List>
@@ -48,6 +48,7 @@ export const ListProducts = ({
         const isSelected = wishlist.includes(product);
         return (
           <ItemProduct
+            key={product.id}
             page={page}
             isSelected={isSelected}
             onClick={

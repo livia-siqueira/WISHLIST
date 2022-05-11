@@ -11,11 +11,17 @@ export const GlobalStyles = createGlobalStyle`
   body {
     margin: 0;
     height: 100vh;
-    width: 100vw;
     padding: 0;
     font-family: sans-serif !important;
     font-weight: 400;
     font-style: normal;
     transition: all 0.50s linear;
+    overflow-x: hidden ;
+
+    @media (max-width: 768px){
+    span{font-size: 0.6rem;}
   }
+  }
+
+
 `;

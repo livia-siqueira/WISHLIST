@@ -1,8 +1,8 @@
 import { ChangeEvent } from "react";
 import { InputSearch } from "../../atoms/InputSearch";
 import { Logo } from "../../atoms/Logo";
-import { AreaInformantions } from "../../molecules/AreaInformantions";
-import { Header } from "./styles";
+import { AreaInformantions } from "../../molecules/AreaInformations";
+import { AreaRight, Header } from "./styles";
 
 interface IPropsMagaNetsHeader {
   onSearch?: (event: ChangeEvent<HTMLInputElement>) => void;
@@ -12,10 +12,10 @@ export const MagaNetsHeader = ({ onSearch }: IPropsMagaNetsHeader) => {
   return (
     <Header>
       <Logo />
-      <div>
+      <AreaRight>
         <AreaInformantions />
         <InputSearch onSearch={onSearch} />
-      </div>
+      </AreaRight>
     </Header>
   );
 };
