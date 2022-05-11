@@ -8,7 +8,7 @@ interface IPropsInputSearch {
 export const InputSearch = ({ onSearch }: IPropsInputSearch) => {
   return (
     <AreaSearch>
-      <Input placeholder="Busca" onChange={onSearch} />
+      <Input placeholder="Busca" onChange={onSearch} data-test="inputSearch" />
       <IconSearch />
     </AreaSearch>
   );

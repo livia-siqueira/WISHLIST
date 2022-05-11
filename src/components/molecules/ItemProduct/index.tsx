@@ -23,13 +23,16 @@ export const ItemProduct = ({
   page,
 }: IPropsItemProduct) => {
   const ButtonHome = (
-    <ButtonFavorite onClick={() => onClick(product)}>
+    <ButtonFavorite
+      onClick={() => onClick(product)}
+      data-test={`${product.id}`}
+    >
       <IconFavorite isSelected={isSelected} />
     </ButtonFavorite>
   );
 
   const ButtonWishlist: JSX.Element = (
-    <ButtonRemove onClick={() => onClick(product)}>
+    <ButtonRemove onClick={() => onClick(product)} data-test={`${product.id}`}>
       <AiOutlineCloseCircle size={36} />
     </ButtonRemove>
   );

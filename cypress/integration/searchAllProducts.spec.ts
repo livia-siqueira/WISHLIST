@@ -4,19 +4,19 @@ describe("search product", () => {
   });
 
   it("search product in home", () => {
-    cy.get(".sc-eKszNL").focus().clear().type("kit").blur();
-    cy.get(".sc-eKszNL").focus().clear().type("Nike").blur();
-    cy.get(".sc-eKszNL").focus().clear();
+    cy.get("[data-test=inputSearch]").focus().clear().type("kit").blur();
+    cy.get("[data-test=inputSearch]").focus().clear().type("Nike").blur();
+    cy.get("[data-test=inputSearch]").focus().clear();
   });
 
   it("search product in wishlist", () => {
-    cy.get(":nth-child(1) > .sc-hlnMnd").click();
-    cy.get(":nth-child(5) >  .sc-hlnMnd").click();
-    cy.get(":nth-child(6) >  .sc-hlnMnd").click();
+    cy.get("[data-test=1]").click();
+    cy.get("[data-test=2]").click();
+    cy.get("[data-test=3]").click();
 
-    cy.get(":nth-child(3) > .sc-lbOyJj").click();
-    cy.get(".sc-eKszNL").focus().clear().type("kit").blur();
-    cy.get(".sc-eKszNL").focus().clear().type("Nike");
-    cy.get(".sc-eKszNL").focus().clear();
+    cy.get("[data-test=wishlist]").click();
+    cy.get("[data-test=inputSearch]").focus().clear().type("kit").blur();
+    cy.get("[data-test=inputSearch]").focus().clear().type("Nike");
+    cy.get("[data-test=inputSearch]").focus().clear();
   });
 });
