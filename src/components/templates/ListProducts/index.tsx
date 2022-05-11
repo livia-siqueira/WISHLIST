@@ -1,7 +1,6 @@
-import { useEffect, useState } from "react";
-import { Product } from "../../../shared/types";
-import { useStore } from "../../../store";
-import { ItemProduct } from "../../molecules/ItemProduct";
+import { Product } from "@/shared/index";
+import { useStore } from "@/store/index";
+import { ItemProduct } from "@/components/molecules";
 import { List, MessageEmptyProducts } from "./styles";
 
 interface IPropsListsProducts {

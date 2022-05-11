@@ -1,5 +1,4 @@
-import { getAllProducts } from "../shared/helpers/getProducts";
-import { TAllProducts } from "../shared/types";
+import { getAllProducts, TAllProducts } from "@/shared/index";
 import List from "./list-products";
 
 export default function Home({ products }: TAllProducts) {

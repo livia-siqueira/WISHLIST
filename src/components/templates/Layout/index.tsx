@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { ChangeEvent, ReactNode } from "react";
-import { MagaNetsHeader } from "../../organisms";
+import { MagaNetsHeader } from "@/components/organisms";
 import { AreaLinks, Container, Main } from "./styles";
 
 interface IPropsLayout {

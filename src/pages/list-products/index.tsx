@@ -1,7 +1,6 @@
 import { ChangeEvent, useCallback, useState } from "react";
-import { Layout } from "../../components/templates/Layout";
-import { ListProducts } from "../../components/templates/ListProducts";
-import { Product } from "../../shared/types";
+import { Layout, ListProducts } from "@/components/templates";
+import { Product } from "@/shared/index";
 
 interface IPropsListProducts {
   products: Product[];
