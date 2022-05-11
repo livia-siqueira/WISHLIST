@@ -6,7 +6,7 @@ interface Icon {
 }
 
 export const Card = styled.li`
-  border: 1px solid gray;
+  border: 1px solid ${({ theme }) => theme.colors.border};
   width: 250px;
   height: 400px;
   list-style: none;
@@ -15,6 +15,7 @@ export const Card = styled.li`
   align-items: center;
   justify-content: space-between;
   padding: 4rem 1rem;
+  box-shadow: 1px 1px 1px ${({ theme }) => theme.colors.border};
 
   img {
     width: 100px;
@@ -39,7 +40,7 @@ export const Card = styled.li`
 `;
 
 export const Price = styled.span`
-  color: yellow;
+  color: ${({ theme }) => theme.colors.yellow};
   font-weight: bold;
 `;
 

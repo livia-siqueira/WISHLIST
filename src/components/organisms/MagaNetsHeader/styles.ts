@@ -4,8 +4,9 @@ export const Header = styled.header`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  background-color: ${({ theme }) => theme.color.purple};
+  background-color: ${({ theme }) => theme.colors.purple};
   height: 10rem;
+  width: 100vw;
 
   @media (max-width: 1000px) {
     height: 15rem;
