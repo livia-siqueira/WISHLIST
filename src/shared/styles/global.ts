@@ -11,6 +11,7 @@ export const GlobalStyles = createGlobalStyle`
   body {
     margin: 0;
     height: 100vh;
+    width: 100vw;
     padding: 0;
     font-family: sans-serif !important;
     font-weight: 400;

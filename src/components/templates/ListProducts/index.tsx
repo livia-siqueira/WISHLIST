@@ -6,18 +6,45 @@ import { List } from "./styles";
 interface IPropsListsProducts {
   listProducts: Product[];
   page: `Home` | `Wishlist`;
+  searchProduct?: string;
 }
 
-export const ListProducts = ({ listProducts, page }: IPropsListsProducts) => {
+type TMessages = {
+  Home: string;
+  Wishlist: string;
+};
+
+const messages: TMessages = {
+  Home: "Este produto que você está buscando não existe em nossa loja :/",
+  Wishlist:
+    "Não existem produtos em sua lista de desejos, retorne a página inicial e inicie suas compras :)",
+};
+
+export const ListProducts = ({
+  listProducts,
+  page,
+  searchProduct,
+}: IPropsListsProducts) => {
   const { wishlist, addProductInWishlist, removeProductInWishlist } =
     useStore();
 
-  if (listProducts.length === 0) {
-    return <p>Não existem itens na sua lista de desejo</p>;
+  const filteredList = listProducts.filter((productItem) => {
+    if (searchProduct?.length === 0 || !searchProduct) {
+      return productItem;
+    }
+    if (
+      productItem.title.toLowerCase().includes(searchProduct?.toLowerCase())
+    ) {
+      return productItem;
+    }
+  });
+
+  if (listProducts.length === 0 || filteredList.length === 0) {
+    return <p>{messages[page]}</p>;
   }
   return (
     <List>
-      {listProducts.map((product) => {
+      {filteredList.map((product) => {
         const isSelected = wishlist.includes(product);
         return (
           <ItemProduct
